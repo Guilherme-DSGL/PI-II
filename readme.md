@@ -24,7 +24,6 @@ Desenvolver um bot no Discord com a biblioteca [discord.js](https://discord.js.o
 
 A base de dados utilizada pelo bot armazenará informações previamente coletadas das questões da OBI, com os seguintes campos:
 
-- `id` (identificador único)
 - `link` (URL da questão)
 - `titulo` (título da questão)
 - `enunciado` (descrição completa da questão)
