@@ -1,0 +1,21 @@
+{
+  "name": "pi-ii",
+  "version": "1.0.0",
+  "description": "Bem-vindo ao repositório do **PI-II**, um projeto criado para auxiliar os alunos de escolas das regiões de Crateús, Russas e arredores, que utilizam o Discord como plataforma de estudos para a Olimpíada Brasileira de Informática (OBI).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "buiddev": "node deploy-commands-guild.js",
+    "dev": "node .",
+    "build": "node deploy-commands-global.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "eslint": "^9.16.0"
+  }
+}
