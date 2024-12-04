@@ -20,7 +20,7 @@ Desenvolver um bot no Discord com a biblioteca [discord.js](https://discord.js.o
 
 ---
 
-## 🗄️ Estrutura da Base de Dados
+## 🗄️ Estrutura da Base de Dados - CSV
 
 A base de dados utilizada pelo bot armazenará informações previamente coletadas das questões da OBI, com os seguintes campos:
 
