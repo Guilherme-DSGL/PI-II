@@ -35,7 +35,7 @@ A base de dados utilizada pelo bot armazenará informações previamente coletad
 ## 🛠️ Tecnologias Utilizadas
 
 - **[Discord.js](https://discord.js.org/):** Biblioteca Node.js para criar bots no Discord.
-- **API Gemini (Google Bard):** Para geração de insights e dicas personalizados.
+- **API Gemini (Google Bard):** Para geração de insights e dicas sobre as questões da OBI.
 - **Node.js:** Ambiente de execução.
 - **Banco de Dados:** Estrutura para armazenar informações das questões da OBI.
 
