@@ -40,7 +40,7 @@ Prompt
 - **[Discord.js](https://discord.js.org/):** Biblioteca Node.js para criar bots no Discord.
 - **API Gemini (Google Bard):** Para geração de insights e dicas sobre as questões da OBI.
 - **Node.js:** Ambiente de execução.
-- **Banco de Dados:** Estrutura para armazenar informações das questões da OBI.
+- **Base de dados:** Estrutura CSV que armazena os dados das questões da OBI.
 
 ---
 
