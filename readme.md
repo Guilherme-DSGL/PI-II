@@ -11,19 +11,19 @@ Desenvolver um bot no Discord com a biblioteca [discord.js](https://discord.js.o
 ## 📜 Funcionalidades
 
 ### 1. **Buscar insights sobre questões específicas**
-- O usuário pode enviar o **link de uma questão da OBI** por meio de um comando no bot.
+- O usuário deve enviar o **link de uma questão da OBI** por meio de um comando no bot.
 - O bot busca a questão na base de dados e utiliza a **API Gemini** para retornar **dicas** e **insights** sobre como resolver a questão.
 
 ### 2. **Buscar questões por tema**
-- O usuário pode enviar um **tema específico** como comando.
+- O usuário deve enviar um **tema específico** como comando.
 - O bot retorna uma lista de questões relacionadas ao tema buscado, com base nos dados armazenados na base.
 
 ---
 
-## 🗄️ Estrutura da Base de Dados 
+## 🗄️ Estrutura de Classes 
 
 A base de dados utilizada pelo bot armazenará informações previamente coletadas das questões da OBI, com os seguintes campos:
-Questão
+Questão (Base de dados CSV)
 - `link` (URL da questão)
 - `titulo` (título da questão)
 - `enunciado` (descrição completa da questão)
