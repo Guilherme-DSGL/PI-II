@@ -11,34 +11,37 @@ Desenvolver um bot no Discord com a biblioteca [discord.js](https://discord.js.o
 ## 📜 Funcionalidades
 
 ### 1. **Buscar insights sobre questões específicas**
-- O usuário pode enviar o **link de uma questão da OBI** por meio de um comando no bot.
+- O usuário deve enviar o **link de uma questão da OBI** por meio de um comando no bot.
 - O bot busca a questão na base de dados e utiliza a **API Gemini** para retornar **dicas** e **insights** sobre como resolver a questão.
 
 ### 2. **Buscar questões por tema**
-- O usuário pode enviar um **tema específico** como comando.
+- O usuário deve enviar um **tema específico** como comando.
 - O bot retorna uma lista de questões relacionadas ao tema buscado, com base nos dados armazenados na base.
 
 ---
 
-## 🗄️ Estrutura da Base de Dados
+## 🗄️ Estrutura de Classes 
 
 A base de dados utilizada pelo bot armazenará informações previamente coletadas das questões da OBI, com os seguintes campos:
 
-- `id` (identificador único)
+Questão (Base de dados CSV)
 - `link` (URL da questão)
 - `titulo` (título da questão)
 - `enunciado` (descrição completa da questão)
 - `nível_da_questão` (fácil, médio, difícil)
 - `tipo_de_questão` (categoria ou tipo)
 
+Prompt
+- `template` (template do prompt)
++ `build` (metodo para gerar a string do prompt, com os dados da questão)
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
 - **[Discord.js](https://discord.js.org/):** Biblioteca Node.js para criar bots no Discord.
-- **API Gemini (Google Bard):** Para geração de insights e dicas personalizados.
+- **API Gemini (Google Bard):** Para geração de insights e dicas sobre as questões da OBI.
 - **Node.js:** Ambiente de execução.
-- **Banco de Dados:** Estrutura para armazenar informações das questões da OBI.
+- **Base de dados:** Estrutura CSV que armazena os dados das questões da OBI.
 
 ---
 
