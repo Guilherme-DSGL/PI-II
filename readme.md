@@ -8,13 +8,19 @@ Desenvolver um bot para o Discord utilizando a biblioteca [discord.js](https://d
 
 ---
 
+## 🤖 Ícone do Bot
+
+![Ícone do Bot](./assets/icon-bot.png)
+
+---
+
 ## 🏗️ Arquitetura
 
-A aplicação segue o padrão **MVC** (Model-View-Controller) com o objetivo de separar claramente as responsabilidades do sistema e facilitar a manutenção e escalabilidade.
+A aplicação seguirá o padrão **MVC** (Model-View-Controller) com o objetivo de separar as responsabilidades do sistema e facilitar a manutenção.
 
 ### **Camada de View/Interface:**
 - Responsável pela interação com o usuário através de comandos e respostas no Discord.
-- Implementada utilizando a biblioteca [discord.js](https://discord.js.org/), que fornece as ferramentas necessárias para criar e gerenciar bots interativos no Discord.
+- Implementada utilizando a biblioteca [discord.js](https://discord.js.org/), que fornece as ferramentas necessárias para criar e gerenciar as interações do usuário no Discord.
 
 ### **Camada de Controller:**
 - Contém a lógica de negócios para processar os comandos do usuário.
@@ -50,7 +56,7 @@ A aplicação segue o padrão **MVC** (Model-View-Controller) com o objetivo de 
 
 ---
 
-## 🛠️ Tecnologias e Bibliotecas Utilizadas
+## 🛠️ Tecnologias e bibliotecas que irão ser utilizadas
 
 - **[![Discord.js](https://img.icons8.com/color/20/discord-logo.png) Discord.js](https://discord.js.org/):** Biblioteca Node.js para criar bots no Discord.  
 - **[![Node.js](https://img.icons8.com/fluency/20/node-js.png) Node.js](https://nodejs.org/):** Ambiente de execução JavaScript no lado do servidor.  
@@ -73,6 +79,14 @@ A aplicação segue o padrão **MVC** (Model-View-Controller) com o objetivo de 
 - **Processo:**
   - O usuário envia um **tema** via comando slash (`/`).
   - O bot consulta a base de dados (arquivo CSV) e retorna uma lista de questões relacionadas ao tema especificado.
+
+---
+
+## 🎨 Protótipo no Figma
+
+Foi desenvolvido um protótipo do funcionamento das funcionalidades nas telas do discord:
+
+[🔗 Protótipo Bot no Figma](https://www.figma.com/design/QkJkW1DnlGrsD1ZQrcPVEt/Prot%C3%B3tipo-Bot)
 
 ---
 
