@@ -10,13 +10,15 @@ Desenvolver um bot para o Discord utilizando a biblioteca [discord.js](https://d
 
 ## 🤖 Ícone do Bot
 
-![Ícone do Bot](./assets/icon-bot.png)
+<img src="./doc/botzin2.png" alt="Ícone do Bot" width="512" height="512">
 
 ---
 
 ## 🏗️ Arquitetura
 
 A aplicação seguirá o padrão **MVC** (Model-View-Controller) com o objetivo de separar as responsabilidades do sistema e facilitar a manutenção.
+
+![Arquitetura](./doc/arquitetura.png)
 
 ### **Camada de View/Interface:**
 - Responsável pela interação com o usuário através de comandos e respostas no Discord.
