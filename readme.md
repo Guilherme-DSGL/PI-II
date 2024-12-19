@@ -93,6 +93,6 @@ Foi desenvolvido um protótipo do funcionamento das funcionalidades nas telas do
 ---
 
 ## 🗄️ Diagrama de Classes 
-![Diagrama de Classes](./doc/DiagramaDeClasses.jpg)
+![Diagrama de Classes](./doc/DiagramaDeClasses.png)
 
 ---
