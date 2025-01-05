@@ -10,7 +10,9 @@ const {
 const env = require("./utils/consts");
 const { loadCommands } = require("./utils/load-commands");
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [GatewayIntentBits.Guilds],
+});
 
 client.commands = new Collection();
 
@@ -23,8 +25,14 @@ client.once(Events.ClientReady, (readyClient) => {
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
-  if (!interaction.isChatInputCommand()) return;
+  if (interaction.isChatInputCommand()) {
+    chatInputCommand(interaction);
+  } else if (interaction.isAutocomplete()) {
+    autoComplete(interaction);
+  }
+});
 
+async function chatInputCommand(interaction) {
   const command = interaction.client.commands.get(interaction.commandName);
 
   if (!command) {
@@ -35,19 +43,33 @@ client.on(Events.InteractionCreate, async (interaction) => {
   try {
     await command.execute(interaction);
   } catch (error) {
-    console.error(error);
     if (interaction.replied || interaction.deferred) {
       await interaction.followUp({
-        content: "There was an error while executing this command!",
+        content: "Ocorreu um erro ao executar esse comando",
         flags: MessageFlags.Ephemeral,
       });
     } else {
       await interaction.reply({
-        content: "There was an error while executing this command!",
+        content: "Ocorreu um erro ao executar esse comando",
         flags: MessageFlags.Ephemeral,
       });
     }
   }
-});
+}
+
+async function autoComplete(interaction) {
+  const command = interaction.client.commands.get(interaction.commandName);
+
+  if (!command) {
+    console.error(`No command matching ${interaction.commandName} was found.`);
+    return;
+  }
+
+  try {
+    await command.autocomplete(interaction);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 client.login(env.token);

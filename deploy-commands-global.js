@@ -3,12 +3,19 @@ const { deployCommands } = require("./utils/deploy-commands");
 const path = require("node:path");
 const consts = require("./utils/consts");
 
-const commandsPath = path.join(__dirname, "commands");
+const commandsPath = path.join(__dirname, "features");
 
 const commands = loadCommandsForDeploy(commandsPath);
 
+if (!consts.TOKEN) {
+  throw new Error("TOKEN is required");
+}
+if (!consts.BOT_ID) {
+  throw new Error("BOT_ID is required");
+}
+
 deployCommands({
   token: consts.TOKEN,
-  clientId: consts.BOT_ID,
+  bot_id: consts.BOT_ID,
   commands: commands,
 });

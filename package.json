@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "buiddev": "node deploy-commands-guild.js",
-    "dev": "node .",
-    "build": "node deploy-commands-global.js"
+    "builddev": "node deploy-commands-guild.js",
+    "dev": "npm run subjects && node .",
+    "build": "node deploy-commands-global.js",
+    "subjects": "node subjects-gen.js"
   },
   "author": "",
   "license": "ISC",

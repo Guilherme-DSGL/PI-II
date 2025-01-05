@@ -28,7 +28,6 @@ class TopicoModel {
    */
   static getInstance(csvServiceBuilder) {
     if (!TopicoModel.#instance) {
-      console.log("No instância");
       TopicoModel.#instance = new TopicoModel(csvServiceBuilder()); // Passando o serviço corretamente
     }
     return TopicoModel.#instance;
@@ -42,29 +41,36 @@ class TopicoModel {
    */
   getQuestionBySubjectPaginated(subject, currentIndex, itensPerPage) {
     return new Promise((resolve, reject) => {
-      const questions = [];
-      let index = -1;
-      this.#csvService
-        .createReadStream()
-        .on("data", (row) => {
-          if (
-            row.subject.toLowerCase().trim() === subject.toLowerCase().trim()
-          ) {
-            index++;
-            if (index >= currentIndex && index < currentIndex + itensPerPage) {
-              questions.push(row);
+      try {
+        const questions = [];
+        let index = -1;
+        this.#csvService
+          .createReadStream()
+          .on("data", (row) => {
+            if (
+              row.subject.toLowerCase().trim() === subject.toLowerCase().trim()
+            ) {
+              index++;
+              if (
+                index >= currentIndex &&
+                index < currentIndex + itensPerPage
+              ) {
+                questions.push(row);
+              }
             }
-          }
-        })
-        .on("end", () => {
-          console.log(
-            `CSV file successfully processed. found ${questions.length} questions`
-          );
-          resolve(questions);
-        })
-        .on("error", (error) => {
-          reject(error);
-        });
+          })
+          .on("end", () => {
+            console.log(
+              `CSV file successfully processed. found ${questions.length} questions`
+            );
+            resolve(questions);
+          })
+          .on("error", (error) => {
+            reject(error);
+          });
+      } catch (e) {
+        reject(e);
+      }
     });
   }
 }

@@ -3,7 +3,7 @@ const { deployCommands } = require("./utils/deploy-commands");
 const path = require("node:path");
 const consts = require("./utils/consts");
 
-const commandsPath = path.join(__dirname, "commands");
+const commandsPath = path.join(__dirname, "features");
 
 const commands = loadCommandsForDeploy(commandsPath);
 
