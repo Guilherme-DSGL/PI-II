@@ -1,4 +1,9 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
+} = require("discord.js");
 const topicoService = require("./topico-service");
 
 const itemsPerPage = 3;
@@ -8,7 +13,7 @@ const itemsPerPage = 3;
  */
 
 /**
- * Create a paginated topic page interaction.
+ * Create a paginated topic page interaction with embeds.
  * @param {import('discord.js').Interaction} interaction - The interaction object from Discord.
  * @param {string} topicName - The name of the topic to fetch questions for.
  */
@@ -43,7 +48,7 @@ async function createTopicPage(interaction, topicName) {
 }
 
 /**
- * Builds the reply body for the topic page.
+ * Builds the reply body for the topic page with embed.
  * @param {string} topicName - The name of the topic.
  * @param {Array<Question>} questions - The cached questions for the topic.
  * @param {number} currentIndex - The current index for pagination.
@@ -55,7 +60,7 @@ async function buildReplyBody(topicName, questions, currentIndex) {
     questions,
     currentIndex
   );
-  const replyBody = { content: reply };
+  const replyBody = { embeds: [reply] };
   const buttons = createNavigationButtons(
     currentIndex,
     hasNextPage,
@@ -66,11 +71,11 @@ async function buildReplyBody(topicName, questions, currentIndex) {
 }
 
 /**
- * Creates the content response for the topic page.
+ * Creates the content response for the topic page with an embed.
  * @param {string} topicName - The name of the topic.
  * @param {Array<Question>} questions - The cached questions for the topic.
  * @param {number} currentIndex - The current index for pagination.
- * @returns {Promise<{reply: string, hasNextPage: boolean}>} The content and pagination state.
+ * @returns {Promise<{reply: EmbedBuilder, hasNextPage: boolean}>} The content embed and pagination state.
  */
 async function createContentResponse(topicName, questions, currentIndex) {
   const { result, hasNextPage } = await getPageItems(
@@ -82,18 +87,26 @@ async function createContentResponse(topicName, questions, currentIndex) {
   const response = { hasNextPage, questionsLength };
 
   if (questionsLength <= 0) {
-    response.reply = `Não encontrei nenhuma questão relacionada ao assunto: ${topicName}`;
+    response.reply = new EmbedBuilder()
+      .setColor("#FFFF00")
+      .setTitle("Não encontrei :(")
+      .setDescription(
+        `Não encontrei nenhuma questão relacionada ao assunto: ${topicName}`
+      );
     return response;
   }
 
   const fields = buildQuestions(result, currentIndex);
-  response.reply = `**Questões sobre: ${topicName}**\n${fields}`;
-  console.log(response.reply);
+  response.reply = new EmbedBuilder()
+    .setColor("#0000FF")
+    .setTitle(`Questões sobre: ${topicName}`)
+    .setDescription(fields);
+
   return response;
 }
 
 /**
- * Builds the question list as a string for the reply.
+ * Builds the question list as a string for the embed.
  * @param {Array<Question>} questions - The questions to display.
  * @param {number} currentIndex - The current index for pagination.
  * @returns {string} The formatted list of questions.
@@ -106,7 +119,7 @@ function buildQuestions(questions, currentIndex) {
         .replace(/---/g, "")
         .replace(/\s{2,}/g, "\n\n");
       return `
-### Questão #${currentIndex + index + 1}: ${item.title} - Nível: ${item.level}
+**Questão #${currentIndex + index + 1}: ${item.title} - Nível: ${item.level}**
 ${cleanedDescription.split("## Entrada").at(0).trimStart().trimEnd()}
 [Link para a questão](${item.link})
         `;
