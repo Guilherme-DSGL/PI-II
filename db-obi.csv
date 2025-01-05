@@ -1,0 +1,11 @@
+link,title,description,level,subject
+https://olimpiada.ic.unicamp.br/pratique/pj/2019/f1/conta-de-agua/,"Conta de Água","Dada a quantidade de água consumida por uma residência, calcule o valor da conta de água conforme a tabela de tarifas fornecida.",Fácil,Estruturas condicionais
+https://olimpiada.ic.unicamp.br/pratique/pj/2019/f1/zerinho-ou-um/,"Zerinho ou Um","Determine o vencedor de um jogo de Zerinho ou Um entre três jogadores, baseado nas escolhas de 0 ou 1 de cada um.",Fácil,Estruturas condicionais
+https://olimpiada.ic.unicamp.br/pratique/p2/2018/f2/teleferico/,"Teleférico","Calcule o número máximo de pessoas que podem ser transportadas por um teleférico, dadas as restrições de peso e número de cabines.",Médio,Estruturas de repetição
+https://olimpiada.ic.unicamp.br/pratique/p2/2018/f2/viagem/,"Viagem","Determine o menor custo de viagem entre duas cidades, considerando as diferentes rotas e seus respectivos custos.",Difícil,Algoritmos de grafos
+https://olimpiada.ic.unicamp.br/pratique/p2/2017/f2/torres/,"Torres","Calcule o número de maneiras de empilhar blocos de diferentes alturas para formar torres de uma altura específica.",Difícil,Programação dinâmica
+https://olimpiada.ic.unicamp.br/pratique/p2/2017/f1/televisao/,"Televisão","Determine o número mínimo de operações necessárias para ajustar o volume da televisão para um valor desejado.",Fácil,Estruturas condicionais
+https://olimpiada.ic.unicamp.br/pratique/p2/2016/f2/caixa/,"Caixa","Calcule o número mínimo de notas necessárias para fornecer um determinado valor em dinheiro, dadas as denominações disponíveis.",Médio,Algoritmos gulosos
+https://olimpiada.ic.unicamp.br/pratique/p2/2016/f1/escada/,"Escada","Determine o número de maneiras diferentes de subir uma escada de N degraus, podendo avançar um ou dois degraus por vez.",Fácil,Programação dinâmica
+https://olimpiada.ic.unicamp.br/pratique/p2/2015/f2/triangulo/,"Triângulo","Verifique se três segmentos de comprimento dado podem formar um triângulo e, em caso afirmativo, determine seu tipo.",Fácil,Estruturas condicionais
+https://olimpiada.ic.unicamp.br/pratique/p2/2015/f1/caixeiro/,"Caixeiro Viajante","Encontre o caminho de menor custo que permite ao caixeiro viajante visitar todas as cidades exatamente uma vez e retornar à cidade de origem.",Difícil,Algoritmos de grafos

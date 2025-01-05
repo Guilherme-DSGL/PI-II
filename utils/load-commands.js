@@ -15,9 +15,7 @@ function processCommandFiles(directory, files, commands, isDeploy) {
         commands.set(command.data.name, command);
       }
     } else {
-      console.warn(
-        `[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`
-      );
+      console.warn(`[SKIP] The file at ${filePath} is missing discord config`);
     }
   }
 }

@@ -1,5 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
+const topicoService = require("./topico-service.js");
 
+const topicoPage = require("./topico-page.js");
 const command = new SlashCommandBuilder()
   .setName("topico")
   .setDescription("Retorna questões relacionadas a um tópico")
@@ -10,16 +12,11 @@ const command = new SlashCommandBuilder()
       .setRequired(true)
   );
 
-async function topic(interaction) {
-  try {
-    const topicName = interaction.options.getString("nometopico");
-    await interaction.reply(`Ainda não há nada por aqui! Tópico: ${topicName}`);
-  } catch (e) {}
-}
-
 module.exports = {
   data: command,
   async execute(interaction) {
-    await topic(interaction);
+    const topicName = interaction.options.getString("nometopico");
+
+    topicoPage.sendPage(interaction, topicName);
   },
 };
