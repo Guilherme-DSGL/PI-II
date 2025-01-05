@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require("discord.js");
-const topicoService = require("./topico-service.js");
 
 const topicoPage = require("./topico-page.js");
 const command = new SlashCommandBuilder()
@@ -15,8 +14,14 @@ const command = new SlashCommandBuilder()
 module.exports = {
   data: command,
   async execute(interaction) {
-    const topicName = interaction.options.getString("nometopico");
+    try {
+      await interaction.deferReply();
+      const topicName = interaction.options.getString("nometopico");
 
-    topicoPage.sendPage(interaction, topicName);
+      await topicoPage.createTopicPage(interaction, topicName);
+    } catch (e) {
+      console.error(e);
+      await interaction.edit("Não foi possível processar a solicitação.");
+    }
   },
 };

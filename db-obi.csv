@@ -8,4 +8,86 @@ https://olimpiada.ic.unicamp.br/pratique/p2/2017/f1/televisao/,"Televisão","Det
 https://olimpiada.ic.unicamp.br/pratique/p2/2016/f2/caixa/,"Caixa","Calcule o número mínimo de notas necessárias para fornecer um determinado valor em dinheiro, dadas as denominações disponíveis.",Médio,Algoritmos gulosos
 https://olimpiada.ic.unicamp.br/pratique/p2/2016/f1/escada/,"Escada","Determine o número de maneiras diferentes de subir uma escada de N degraus, podendo avançar um ou dois degraus por vez.",Fácil,Programação dinâmica
 https://olimpiada.ic.unicamp.br/pratique/p2/2015/f2/triangulo/,"Triângulo","Verifique se três segmentos de comprimento dado podem formar um triângulo e, em caso afirmativo, determine seu tipo.",Fácil,Estruturas condicionais
-https://olimpiada.ic.unicamp.br/pratique/p2/2015/f1/caixeiro/,"Caixeiro Viajante","Encontre o caminho de menor custo que permite ao caixeiro viajante visitar todas as cidades exatamente uma vez e retornar à cidade de origem.",Difícil,Algoritmos de grafos
+https://olimpiada.ic.unicamp.br/pratique/pj/2021/f3/casamento/,"Casamento de Inteiros","
+
+Vamos definir a operação de **casamento** de dois números inteiros A e B da seguinte forma:
+
+1. Inicialmente, fazemos A e B terem o mesmo número de dígitos, adicionando zeros à esquerda conforme necessário.
+2. Então, cada dígito de A (do menos significativo ao mais significativo) é comparado com o dígito correspondente de B, e o dígito de menor valor é eliminado do número a que pertence (se os dígitos são iguais, nenhum é eliminado).
+3. O resultado da operação de casamento é o par de números inteiros formados pelos dígitos remanescentes de A e B. No caso de não haver dígito remanescente para um dos números, o resultado para esse número é -1.
+
+Por exemplo, considere o casamento de 69961 com 487920:
+
+![Exemplo de casamento](https://via.placeholder.com/350)
+
+O resultado do casamento é o par de números **489** e **9961**.
+
+Dados dois números inteiros, sua tarefa é determinar o resultado do casamento desses dois números.
+
+---
+
+## Entrada
+
+A entrada é composta por duas linhas:
+
+- A primeira linha contém um número inteiro \( A \).
+- A segunda linha contém um número inteiro \( B \).
+
+---
+
+## Saída
+
+Seu programa deve produzir uma única linha contendo os dois números inteiros produzidos pelo casamento dos números dados, em ordem não decrescente.
+
+---
+
+## Restrições
+
+- \(1 \leq A \leq 10^9\)
+- \(1 \leq B \leq 10^9\)
+
+---
+
+## Informações sobre a pontuação
+
+- Para um conjunto de casos de testes valendo **22 pontos**, \(100 \leq A \leq 999\) e \(100 \leq B \leq 999\).
+- Para um conjunto de casos de testes valendo outros **78 pontos**, nenhuma restrição adicional.
+
+---
+
+## Exemplos
+
+### Exemplo 1
+
+| **Entrada** | **Saída** |
+|-------------|-----------|
+| 69961       | 489 9961  |
+| 487920      |           |
+
+---
+
+### Exemplo 2
+
+| **Entrada** | **Saída** |
+|-------------|-----------|
+| 5678        | -1 5678   |
+| 1234        |           |
+
+---
+
+### Exemplo 3
+
+| **Entrada** | **Saída** |
+|-------------|-----------|
+| 21          | 2 2       |
+| 12          |           |
+
+---
+
+### Exemplo 4
+
+| **Entrada** | **Saída** |
+|-------------|-----------|
+| 200         | 0 200     |
+| 100         |           |
+",Difícil,Algoritmos de grafos

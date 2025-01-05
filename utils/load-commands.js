@@ -2,6 +2,13 @@ const { Collection } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
 
+/**
+ *
+ * @param directory
+ * @param files
+ * @param commands
+ * @param {boolean} isDeploy
+ */
 function processCommandFiles(directory, files, commands, isDeploy) {
   for (const file of files) {
     const filePath = path.join(directory, file);
@@ -20,6 +27,12 @@ function processCommandFiles(directory, files, commands, isDeploy) {
   }
 }
 
+/**
+ *
+ * @param directory
+ * @param commands
+ * @param {boolean} isDeploy
+ */
 function readDirectory(directory, commands, isDeploy) {
   const commandFolders = fs.readdirSync(directory);
 
@@ -43,12 +56,20 @@ function readDirectory(directory, commands, isDeploy) {
   }
 }
 
+/**
+ *
+ * @param directory
+ */
 function loadCommands(directory) {
   const commands = new Collection();
   readDirectory(directory, commands, false);
   return commands;
 }
 
+/**
+ *
+ * @param commandsPath
+ */
 function loadCommandsForDeploy(commandsPath) {
   const commands = [];
   readDirectory(commandsPath, commands, true);

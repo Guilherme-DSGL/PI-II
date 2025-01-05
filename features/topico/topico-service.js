@@ -1,29 +1,62 @@
 const topicoModel = require("./topico-model");
+
 /**
-
  * @typedef {import('../../entities/questao.js')} Question
-
- * Função que retorna as questões de um determinado tópico.
- * @param {string} topicName - O nome do tópico.
- * @returns {Promise<Question[]>} Uma promessa que resolve em um array de questões.
+ *  @typedef {import('./topico-model.js')} TopicoModel
  */
-async function topic(topicName, currentIndex, itensPerPage) {
-  try {
-    const result = await topicoModel.getQuestionBySubjectPaginated(
-      topicName,
-      currentIndex,
-      itensPerPage
-    );
-    console.log(result);
-    return result;
-  } catch (e) {
-    console.error(e);
-    return [];
+
+class TopicoService {
+  /**
+   * @type {TopicoService | null}
+   */
+  static #instance;
+
+  /**
+   * @type {TopicoModel}
+   */
+  topicoModel;
+
+  /**
+   * @param {TopicoModel} topicoModel
+   * @private
+   */
+  constructor(topicoModel) {
+    this.topicoModel = topicoModel;
+  }
+
+  /**
+   * Retorna a instância única da classe. Cria a instância caso ela ainda não exista.
+   * @param topicoModelBuilder
+   * @returns {TopicoService} A instância única de TopicoService.
+   */
+  static getInstance(topicoModelBuilder) {
+    if (!TopicoService.#instance) {
+      console.log("Service No instância");
+      TopicoService.#instance = new TopicoService(topicoModelBuilder());
+    }
+    return TopicoService.#instance;
+  }
+
+  /**
+   * Função que retorna as questões de um determinado tópico.
+   * @param {string} topicName - O nome do tópico.
+   * @param {number} currentIndex - O índice atual para paginação.
+   * @param {number} itensPerPage - A quantidade de itens por página.
+   * @returns {Promise<Question[]>} Uma promessa que resolve em um array de questões.
+   */
+  async getQuestionsByTopic(topicName, currentIndex, itensPerPage) {
+    try {
+      const result = await this.topicoModel.getQuestionBySubjectPaginated(
+        topicName,
+        currentIndex,
+        itensPerPage
+      );
+      return result;
+    } catch (e) {
+      console.error(e);
+      return [];
+    }
   }
 }
 
-const topicoService = {
-  topic,
-};
-
-module.exports = topicoService;
+module.exports = TopicoService.getInstance(() => topicoModel);

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-
+const questaoService = require("./questao-service");
 const command = new SlashCommandBuilder()
   .setName("questao")
   .setDescription("Retorna dicas e insigths das questões da OBI")
@@ -9,15 +9,25 @@ const command = new SlashCommandBuilder()
       .setDescription("Link da questão da OBI")
       .setRequired(true)
   );
-async function question(interaction) {
-  try {
-    const link = interaction.options.getString("link");
-    await interaction.reply(`Link da questão da OBI: ${link}`);
-  } catch (e) {}
-}
+
 module.exports = {
   data: command,
   async execute(interaction) {
-    question(interaction);
+    try {
+      await interaction.deferReply();
+      const link = interaction.options.getString("link");
+      const question = await questaoService.getQuestionByLink(link);
+      if (!question) {
+        return interaction.reply("Questão não encontrada.");
+      }
+      const apiResponse = await questaoService.getQuestionSuggestion(question);
+
+      await interaction.editReply(`${apiResponse}`);
+    } catch (e) {
+      console.error(e);
+      await interaction.editReply(
+        "Ocorreu um erro ao tentar buscar processar o comando."
+      );
+    }
   },
 };

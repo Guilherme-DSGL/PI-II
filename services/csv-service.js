@@ -2,14 +2,27 @@ const fs = require("fs");
 const path = require("path");
 const csvParser = require("csv-parser");
 
-const csvFilePath = path.resolve(__dirname, "../db-obi.csv");
+class CsvParserService {
+  #csvFilePath;
 
-function createReadStream() {
-  return fs.createReadStream(csvFilePath).pipe(csvParser());
+  /**
+   * Construtor da classe CsvParserService.
+   * @param {string} csvFilePath - Caminho para o arquivo CSV.
+   */
+  constructor(csvFilePath) {
+    this.#csvFilePath = csvFilePath || path.resolve(__dirname, "../db-obi.csv");
+  }
+
+  /**
+   * Cria um stream de leitura do arquivo CSV e o processa com o csv-parser.
+   * @returns {ReadableStream} O stream de leitura do CSV.
+   */
+  createReadStream() {
+    return fs.createReadStream(this.#csvFilePath).pipe(csvParser());
+  }
 }
 
-const csvParserService = {
-  createReadStream,
-};
+const csvParserServiceInstance = new CsvParserService();
 
-module.exports = csvParserService;
+// Exporta a instância única de CsvParserService
+module.exports = csvParserServiceInstance;

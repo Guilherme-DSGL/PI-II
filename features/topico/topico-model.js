@@ -1,42 +1,72 @@
-const csvParserService = require("../../services/csv-service");
+const csvParserServiceInstance = require("../../services/csv-service");
 
 /**
  * @typedef {import('../../entities/questao.js')} Question
+ * @typedef {import('../../services/csv-service.js')} CsvParserService
  */
 
-/**
- * Obtém perguntas filtradas por assunto.
- * @param {string} subject - O assunto desejado.
- * @returns {Promise<Question[]>} - Uma promessa que resolve com as perguntas filtradas.
- */
-function getQuestionBySubjectPaginated(subject, currentIndex, itensPerPage) {
-  return new Promise((resolve, reject) => {
-    const questions = [];
-    let index = -1;
-    csvParserService
-      .createReadStream()
-      .on("data", (row) => {
-        if (row.subject.toLowerCase().trim() === subject.toLowerCase().trim()) {
-          index++;
-          if (index >= currentIndex && index < currentIndex + itensPerPage) {
-            questions.push(row);
+class TopicoModel {
+  /**
+   * @type {TopicoModel | null}
+   */
+  static #instance;
+
+  #csvService;
+
+  /**
+   * @param {CsvParserService} csvService - Instância do serviço de parser de CSV.
+   * @private
+   */
+  constructor(csvService) {
+    this.#csvService = csvService;
+  }
+
+  /**
+   * Retorna a instância única da classe. Cria a instância caso ela ainda não exista.
+   * @param {Function} csvServiceBuilder
+   * @returns {TopicoModel} A instância única de TopicoModel.
+   */
+  static getInstance(csvServiceBuilder) {
+    if (!TopicoModel.#instance) {
+      console.log("No instância");
+      TopicoModel.#instance = new TopicoModel(csvServiceBuilder()); // Passando o serviço corretamente
+    }
+    return TopicoModel.#instance;
+  }
+  /**
+   * Obtém perguntas filtradas por assunto.
+   * @param {string} subject - O assunto desejado.
+   * @param {number} currentIndex - O índice atual para paginação.
+   * @param {number} itensPerPage - A quantidade de itens por página.
+   * @returns {Promise<Question[]>} - Uma promessa que resolve com as perguntas filtradas.
+   */
+  getQuestionBySubjectPaginated(subject, currentIndex, itensPerPage) {
+    return new Promise((resolve, reject) => {
+      const questions = [];
+      let index = -1;
+      this.#csvService
+        .createReadStream()
+        .on("data", (row) => {
+          if (
+            row.subject.toLowerCase().trim() === subject.toLowerCase().trim()
+          ) {
+            index++;
+            if (index >= currentIndex && index < currentIndex + itensPerPage) {
+              questions.push(row);
+            }
           }
-        }
-      })
-      .on("end", () => {
-        console.log(
-          `CSV file successfully processed. found ${questions.length} questions`
-        );
-        resolve(questions);
-      })
-      .on("error", (error) => {
-        reject(error);
-      });
-  });
+        })
+        .on("end", () => {
+          console.log(
+            `CSV file successfully processed. found ${questions.length} questions`
+          );
+          resolve(questions);
+        })
+        .on("error", (error) => {
+          reject(error);
+        });
+    });
+  }
 }
 
-const topicoModel = {
-  getQuestionBySubjectPaginated,
-};
-
-module.exports = topicoModel;
+module.exports = TopicoModel.getInstance(() => csvParserServiceInstance);

@@ -1,6 +1,41 @@
-require("dotenv").config();
+/**
+ * @typedef {import('../entities/questao.js')} Question
+ */
 
-const TEMPLATE_QUESTION_PROMPT = `
+/**
+ * Classe base para os prompts.
+ * @abstract
+ */
+class Prompt {
+  promptTemplate;
+
+  /**
+   * Construtor da classe Prompt.
+   * @param {string} promptTemplate - O template para o prompt.
+   */
+  constructor(promptTemplate) {
+    if (this.constructor === Prompt) {
+      throw new Error("Não se pode instanciar a classe base diretamente");
+    }
+    this.promptTemplate = promptTemplate;
+  }
+
+  /**
+   * Método abstrato para construir o prompt.
+   * @param {object} object - O objeto para preencher o template do prompt.
+   * @returns {string} O prompt final.
+   * @throws {Error} Caso o método não seja implementado.
+   */
+  buildPrompt(object) {
+    throw new Error("Método 'buildPrompt' não implementado");
+  }
+}
+
+class QuestionPrompt extends Prompt {
+  static instance;
+
+  constructor() {
+    super(`
 Contexto:
 Você é um mentor em programação competitiva, especializado em orientar estudantes que participam da OBI (Olimpíada Brasileira de Informática). Seu objetivo é fornecer sugestões iniciais e estratégias gerais que ajudem o estudante a começar a resolver o problema apresentado, mas não fornecer a solução completa.
 
@@ -38,12 +73,32 @@ Para um problema sobre calcular a soma de números em um intervalo, a IA pode su
 Nota: Você deve se limitar a sugerir direções e estratégias iniciais. Não deve fornecer a solução final.
 
 **Limite de Caracteres:** A resposta não deve ultrapassar 2000 caracteres, incluindo espaços e quebras de linha. Tenha em mente que a clareza e objetividade são essenciais para fornecer uma ajuda eficaz sem exceder esse limite.
-`;
+`);
+  }
 
-module.exports = {
-  TOKEN: process.env.DISCORD_TOKEN,
-  BOT_ID: process.env.DISCORD_CLIENT_ID,
-  PRIVATE_SERVER_ID: process.env.DISCORD_GUILD_ID, //for tests in private discord
-  GEMINI_API_KEY: process.env.GEMINI_API_KEY,
-  TEMPLATE_QUESTION_PROMPT: TEMPLATE_QUESTION_PROMPT,
+  /**
+   * Constrói o prompt de pergunta substituindo o marcador no template.
+   * @param {Question} question - A pergunta a ser colocada no template.
+   * @returns {string} O prompt com a pergunta preenchida.
+   */
+  buildPrompt(question) {
+    return this.promptTemplate.replace("{{question}}", question.description);
+  }
+
+  /**
+   * Método para obter a instância única.
+   * @returns {QuestionPrompt} A instância única da classe QuestionPrompt.
+   */
+  static getInstance() {
+    if (!QuestionPrompt.instance) {
+      QuestionPrompt.instance = new QuestionPrompt();
+    }
+    return QuestionPrompt.instance;
+  }
+}
+
+const prompts = {
+  questionSuggestions: QuestionPrompt.getInstance(),
 };
+
+module.exports = { prompts, Prompt };

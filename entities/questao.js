@@ -1,11 +1,18 @@
 class Question {
   /**
+   * @param {string} subject The subject
+   * @param {string} title The title
+   * @param {string} link
+   * @param {string} description
+   * @param {string} level
    * @param {string} subject
-   * @param {string} text
    */
-  constructor(subject, text) {
+  constructor(link, title, description, level, subject) {
     this.subject = subject;
-    this.text = text;
+    this.title = title;
+    this.link = link;
+    this.description = description;
+    this.level = level;
   }
 }
 module.exports = Question;
