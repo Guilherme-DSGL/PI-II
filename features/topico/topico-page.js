@@ -117,12 +117,15 @@ function buildQuestions(questions, currentIndex) {
       const cleanedDescription = item.description
         .replace(/!\[.*?\]\(.*?\)+/g, "") // Remove links
         .replace(/---/g, "")
-        .replace(/\s{2,}/g, "\n\n");
-      return `
-**Questão #${currentIndex + index + 1}: ${item.title} - Nível: ${item.level}**
+        .replace(/\s{2,}/g, "\n\n"); // remove spaces
+      return `## Questão #${currentIndex + index + 1}: ${
+        item.title
+      } - **Nível: ${item.level}**
+### Descrição:
 ${cleanedDescription.split("## Entrada").at(0).trimStart().trimEnd()}
-[Link para a questão](${item.link})
-        `;
+
+[🔗 Link para a questão](${item.link})
+      `;
     })
     .join("\n");
 }

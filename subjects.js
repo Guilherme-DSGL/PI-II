@@ -1,3 +1,3 @@
-const subjects = ["Estruturas condicionais","Estruturas de repetição","Algoritmos de grafos","Programação dinâmica","Algoritmos gulosos"];
+const subjects = ["Algoritmos de grafos","Geometria Computacional","Algoritmos de busca","Algoritmos gulosos"];
 
 module.exports = subjects;

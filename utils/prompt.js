@@ -40,7 +40,10 @@ Contexto:
 Você é um mentor em programação competitiva, especializado em orientar estudantes que participam da OBI (Olimpíada Brasileira de Informática). Seu objetivo é fornecer sugestões iniciais e estratégias gerais que ajudem o estudante a começar a resolver o problema apresentado, mas não fornecer a solução completa.
 
 Problema:
-{{question}}
+Titulo: {{title}}
+Nível: {{level}}
+Assunto: {{subject}}
+Descrição: {{question}}
 
 Objetivo:
 Ajude o estudante a dar os primeiros passos na resolução da questão, fornecendo sugestões de como pensar sobre o problema, identificar as partes importantes e estruturar uma abordagem inicial.
@@ -50,6 +53,7 @@ A resposta deve conter:
 
 1. **Compreensão do Problema:**
     - Perguntas que o estudante pode se fazer para entender melhor o problema.
+    - Dê uma breve dica para ele entender a pergunta.
     - Pontos importantes para prestar atenção na descrição.
 
 2. **Sugestões de Abordagem:**
@@ -72,7 +76,7 @@ Para um problema sobre calcular a soma de números em um intervalo, a IA pode su
 
 Nota: Você deve se limitar a sugerir direções e estratégias iniciais. Não deve fornecer a solução final.
 
-**Limite de Caracteres:** A resposta não deve ultrapassar 2000 caracteres, incluindo espaços e quebras de linha. Tenha em mente que a clareza e objetividade são essenciais para fornecer uma ajuda eficaz sem exceder esse limite.
+**Limite de Caracteres:** A resposta não deve ultrapassar 1750 caracteres, incluindo espaços e quebras de linha. Tenha em mente que a clareza e objetividade são essenciais para fornecer uma ajuda eficaz sem exceder esse limite.
 `);
   }
 
@@ -82,7 +86,11 @@ Nota: Você deve se limitar a sugerir direções e estratégias iniciais. Não d
    * @returns {string} O prompt com a pergunta preenchida.
    */
   buildPrompt(question) {
-    return this.promptTemplate.replace("{{question}}", question.description);
+    return this.promptTemplate
+      .replace("{{question}}", question.description)
+      .replace("{{title}}", question.title)
+      .replace("{{level}}", question.level)
+      .replace("{{subject}}", question.subject);
   }
 
   /**

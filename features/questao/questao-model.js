@@ -34,7 +34,6 @@ class QuestaoModel {
    */
   static getInstance(iaServiceBuilder, csvServiceBuilder) {
     if (!QuestaoModel.#instance) {
-      console.log("No instância");
       QuestaoModel.#instance = new QuestaoModel(
         iaServiceBuilder(),
         csvServiceBuilder()
@@ -51,7 +50,6 @@ class QuestaoModel {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await this.#iaService.communicate(prompt);
-        console.log(result.text());
         resolve(result.text());
       } catch (e) {
         reject(e);
@@ -70,7 +68,6 @@ class QuestaoModel {
           .createReadStream()
           .on("data", (row) => {
             if (row.link === link) {
-              console.log(row);
               resolve(row);
             }
           })

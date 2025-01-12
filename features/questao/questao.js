@@ -18,13 +18,18 @@ module.exports = {
       const link = interaction.options.getString("link");
       const question = await questaoService.getQuestionByLink(link);
       if (!question) {
-        return interaction.reply("Questão não encontrada.");
+        return interaction.editReply("Questão não encontrada.");
       }
       const apiResponse = await questaoService.getQuestionSuggestion(question);
 
-      await interaction.editReply(`${apiResponse}`);
+      const titleMarkdown = `### ${question.title} - ${question.level}\n`;
+      const subjectMarkdown = `### Assunto: ${question.subject}\n`;
+      const linkMarkdown = `[🔗 Acesse a questão aqui](${question.link})\n\n`;
+
+      await interaction.editReply(
+        `${titleMarkdown}${subjectMarkdown}${linkMarkdown}${apiResponse}`
+      );
     } catch (e) {
-      console.error(e);
       await interaction.editReply(
         "Ocorreu um erro ao tentar buscar processar o comando."
       );

@@ -32,7 +32,6 @@ class QuestaoService {
    */
   static getInstance(questaoModelBuilder) {
     if (!QuestaoService.#instance) {
-      console.log("Service No instância");
       QuestaoService.#instance = new QuestaoService(questaoModelBuilder());
     }
     return QuestaoService.#instance;

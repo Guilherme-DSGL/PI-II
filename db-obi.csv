@@ -2,12 +2,12 @@ link,title,description,level,subject
 https://olimpiada.ic.unicamp.br/pratique/pj/2021/f3/ogro/,Ogro,"
 O Ogro da Nlogônia está aprendendo a contar até dez usando os dedos das mãos (assim como os humanos, ele possui 2 mãos com 5 dedos cada)). Ele está treinando muito, mas gostaria de ter um aplicativo para ajudá-lo nessa empreitada. O Ogro aprendeu a mostrar a representação de um número com as mãos da seguinte forma:
 
-*   se o número pode ser representado usando apenas uma das mãos, o Ogro usa os dedos na mão esquerda e mantém a mão direita fechada.
-*   caso contrário, o Ogro mostra todos os cinco dedos da mão esquerda, e na mão direita mostra os dedos que faltam para representar o número.
+  se o número pode ser representado usando apenas uma das mãos, o Ogro usa os dedos na mão esquerda e mantém a mão direita fechada.
+  caso contrário, o Ogro mostra todos os cinco dedos da mão esquerda, e na mão direita mostra os dedos que faltam para representar o número.
 
 Por exemplo, para o número 3, o Ogro mostra:
 
-III \*
+III 
 
 onde cada letra I representa um dedo e a mão fechada é representada pelo símbolo \`\*' (asterisco). Para o número 8 o Ogro mostra:
 
@@ -25,7 +25,7 @@ Seu programa deve produzir duas linhas na saída. A primeira linha deve conter a
 
 ## Restrições
 
-*   0 ≤ N ≤ 10
+  0 ≤ N ≤ 10
 
 ## Exemplos
 
@@ -46,7 +46,7 @@ III
 **Saída**
 
 III
-\*
+
 	
 
 **Entrada**
@@ -54,14 +54,12 @@ III
 0
 
 **Saída**
-
-\*
-\*",Difícil,Algoritmos de grafos
+",Difícil,Algoritmos de grafos
 https://olimpiada.ic.unicamp.br/pratique/pj/2021/f3/casamento/,Casamento de Inteiros,"Vamos definir a operação de _casamento_ de dois números inteiros A e B da seguinte forma:
 
-*   inicialmente fazemos A e B terem o mesmo número de dígitos, adicionando zeros à esquerda conforme necessário;
-*   então cada dígito de A (do menos significativo ao mais significativo) é comparado com o dígito correspondente de B, e o dígito de menor valor é eliminado do número a que pertence (se os dígitos são iguais nenhum é eliminado).
-*   o resultado da operação de casamento é o par de números inteiros formados pelos dígitos remanescentes de A e B. No caso de não haver digito remanescente para um dos números, o resultado para esse número é -1.
+inicialmente fazemos A e B terem o mesmo número de dígitos, adicionando zeros à esquerda conforme necessário;
+então cada dígito de A (do menos significativo ao mais significativo) é comparado com o dígito correspondente de B, e o dígito de menor valor é eliminado do número a que pertence (se os dígitos são iguais nenhum é eliminado).
+o resultado da operação de casamento é o par de números inteiros formados pelos dígitos remanescentes de A e B. No caso de não haver digito remanescente para um dos números, o resultado para esse número é -1.
 
 Por exemplo, considere o casamento de 69961 com 487920:
 
@@ -77,13 +75,13 @@ Seu programa deve produzir uma única linha, contendo os dois números inteiros 
 
 ## Restrições
 
-*   1 ≤ A ≤ 109
-*   1 ≤ B ≤ 109
+1 ≤ A ≤ 109
+1 ≤ B ≤ 109
 
 ## Informações sobre a pontuação
 
-*   Para um conjunto de casos de testes valendo 22 pontos, 100 ≤ A ≤ 999 e 100 ≤ B ≤ 999.
-*   Para um conjunto de casos de testes valendo outros 78 pontos, nenhuma restrição adicional.
+Para um conjunto de casos de testes valendo 22 pontos, 100 ≤ A ≤ 999 e 100 ≤ B ≤ 999.
+Para um conjunto de casos de testes valendo outros 78 pontos, nenhuma restrição adicional.
 
 ## Exemplos
 
@@ -137,14 +135,14 @@ Se programa deve produzir uma única linha, contendo um único inteiro, o númer
 
 ### Restrições
 
-*   1 ≤ N ≤ 100 000
-*   1 ≤ M ≤ 100 000
-*   1 ≤ V\_i ≤ N, para 1 ≤ i ≤ N
+1 ≤ N ≤ 100 000
+1 ≤ M ≤ 100 000
+1 ≤ V\_i ≤ N, para 1 ≤ i ≤ N
 
 ### Informações sobre a pontuação
 
-*   Para um conjunto de casos de testes valendo 40 pontos, N ≤ 2000 e M ≤ 2000.
-*   Para um conjunto de casos de testes valendo outros 60 pontos, nenhuma restrição adicional.
+Para um conjunto de casos de testes valendo 40 pontos, N ≤ 2000 e M ≤ 2000.
+Para um conjunto de casos de testes valendo outros 60 pontos, nenhuma restrição adicional.
 
 ### Exemplos
 
@@ -189,19 +187,19 @@ Seu programa deve produzir uma única linha na saída, contendo um único caract
 
 ## Restrições
 
-*   3 ≤ N ≤ 100
-*   1 ≤ M ≤ 100
-*   2 ≤ P ≤ N\\times M
-*   1 ≤ C\_i ≤ M e 1 ≤ L\_i ≤ M para 1 ≤ i ≤ P
-*   1 ≤ S\_{C} ≤ N e 1 ≤ S\_{L} ≤ M
-*   1 ≤ R\_{C} ≤ N e 1 ≤ R\_{L} ≤ M
-*   As posições do Sr. Sapo e da sua namorada são distintas e ambas são posições de pedras especificadas na entrada.
+3 ≤ N ≤ 100
+1 ≤ M ≤ 100
+2 ≤ P ≤ N\\times M
+1 ≤ C\_i ≤ M e 1 ≤ L\_i ≤ M para 1 ≤ i ≤ P
+1 ≤ S\_{C} ≤ N e 1 ≤ S\_{L} ≤ M
+1 ≤ R\_{C} ≤ N e 1 ≤ R\_{L} ≤ M
+As posições do Sr. Sapo e da sua namorada são distintas e ambas são posições de pedras especificadas na entrada.
 
 ## Informações sobre a pontuação
 
-*   Para um conjunto de casos de testes valendo 14 pontos, M = 1
-*   Para um conjunto de casos de testes valendo outros 16 pontos, para a pedra em que o Sr. Sapo está inicialmente, há no máximo uma outra pedra para a qual ele pode saltar, e para todas as outras pedras, há no máximo duas para a qual ele pode saltar (ou seja, se o Sr. Sapo consegue chegar ao destino, há um único caminho de pedras que podem ser usadas, e esse caminho não tem ""bifurcações"").
-*   Para um conjunto de casos de testes valendo outros 70 pontos, nenhuma restrição adicional.
+Para um conjunto de casos de testes valendo 14 pontos, M = 1
+Para um conjunto de casos de testes valendo outros 16 pontos, para a pedra em que o Sr. Sapo está inicialmente, há no máximo uma outra pedra para a qual ele pode saltar, e para todas as outras pedras, há no máximo duas para a qual ele pode saltar (ou seja, se o Sr. Sapo consegue chegar ao destino, há um único caminho de pedras que podem ser usadas, e esse caminho não tem ""bifurcações"").
+Para um conjunto de casos de testes valendo outros 70 pontos, nenhuma restrição adicional.
 
 ## Exemplos
 
@@ -241,8 +239,8 @@ S
 N",Médio,Algoritmos de busca
 https://olimpiada.ic.unicamp.br/pratique/pj/2020/f3/calorias/,Calorias,"Um aplicativo de celular está sendo desenvolvido para, a partir da foto de um prato contendo uma refeição, estimar a quantidade de calorias da refeição. O algoritmo de inteligência artificial (IA) utilizado no aplicativo produz três números inteiros, E1, E2 e E3. E1 é a quantidade mínima de calorias estimada e E2 a quantidade máxima de calorias estimada para a refeição da fotografia. E3 só tem significado se a diferença entre as quantidades estimadas mínima e máxima são maiores do que um valor pré-definido X; nesse caso, E3 é a quantidade de calorias estimada por um método alternativo. Depois de vários testes, os desenvolvedores do aplicativo determinaram que os melhores resultados são obtidos usando as estimativas produzidas pelo algoritmo de IA da seguinte forma:
 
-*   se a diferença entre E1 e E2 for menor ou igual ao valor de X, o aplicativo deve mostrar ao usuário o valor de E2 como o número de calorias;
-*   se a diferença entre E1 e E2 for maior do que o valor de X, o aplicativo deve mostrar ao usuário o valor de E3 como o número de calorias;
+se a diferença entre E1 e E2 for menor ou igual ao valor de X, o aplicativo deve mostrar ao usuário o valor de E2 como o número de calorias;
+se a diferença entre E1 e E2 for maior do que o valor de X, o aplicativo deve mostrar ao usuário o valor de E3 como o número de calorias;
 
 Dados o valor de X e as três estimativas produzidas pelo algoritmo de IA, escreva um programa que determine o resultado que deve ser mostrado para o usuário.
 
@@ -255,10 +253,9 @@ A primeira linha da entrada contém um inteiro, o valor de E1. A segunda linha c
 Seu programa deve produzir uma única linha, contendo um único inteiro, o resultado que deve ser mostrado para o usuário do aplicativo.
 
 ## Restrições
-
-*   0 ≤ E1 ≤ E2 ≤ 10000
-*   0 ≤ E3 ≤ 10000
-*   0 ≤ X ≤ 10000
+0 ≤ E1 ≤ E2 ≤ 10000
+0 ≤ E3 ≤ 10000
+0 ≤ X ≤ 10000
 
 ## Exemplos
 
@@ -302,8 +299,8 @@ Seu programa deve produzir uma única linha, contendo dois números inteiros, re
 
 ## Restrições
 
-*   1 ≤ A ≤ 106
-*   1 ≤ B ≤ 106
+1 ≤ A ≤ 106
+1 ≤ B ≤ 106
 
 ## Exemplos
 
@@ -357,14 +354,14 @@ Seu programa deve produzir uma única linha na saída, contendo um único caract
 
 ## Restrições
 
-*   2 ≤ N ≤ 10000
-*   0 ≤ Xi, Yi ≤ 1000, para 1 ≤ i ≤ N
-*   1 ≤ A ≤ 10000
+2 ≤ N ≤ 10000
+0 ≤ Xi, Yi ≤ 1000, para 1 ≤ i ≤ N
+1 ≤ A ≤ 10000
 
 ## Informações sobre a pontuação
 
-*   Para um conjunto de casos de testes valendo 20 pontos, Yi = 0 para 1 ≤ i ≤ N.
-*   Para um conjunto de casos de testes valendo 80 pontos adicionais, nenhuma outra restrição.
+Para um conjunto de casos de testes valendo 20 pontos, Yi = 0 para 1 ≤ i ≤ N.
+Para um conjunto de casos de testes valendo 80 pontos adicionais, nenhuma outra restrição.
 
 ## Exemplos
 
@@ -432,8 +429,8 @@ Seu programa deve produzir uma única linha, contendo um único inteiro, o maior
 
 ## Restrições
 
-*   1 ≤ N ≤ 1000
-*   1 ≤ A, B, C, D, E, F ≤ 6, todos distintos em um dado.
+  1 ≤ N ≤ 1000
+  1 ≤ A, B, C, D, E, F ≤ 6, todos distintos em um dado.
 
 ## Exemplos
 
@@ -476,16 +473,16 @@ Seu programa deve imprimir uma linha contendo um inteiro, o número de manchas n
 
 ## Restrições
 
-*   1 ≤ N ≤ 1000
-*   1 ≤ M ≤ 1000
-*   O valor de P é 1, representando um pixel preto, ou 0, representando um pixel branco.
+  1 ≤ N ≤ 1000
+  1 ≤ M ≤ 1000
+  O valor de P é 1, representando um pixel preto, ou 0, representando um pixel branco.
 
 ## Informações sobre a pontuação
 
-*   Para um conjunto de casos de testes valendo 10 pontos, N=M=2.
-*   Para um conjunto de casos de testes valendo outros 20 pontos, N=1.
-*   Para um conjunto de casos de testes valendo outros 20 pontos, N,M ≤ 100.
-*   Para um conjunto de casos de testes valendo outros 50 pontos, nenhuma restrição adicional ( _Atenção, para essa parcial, não é recomendada uma implementação recursiva!_)
+  Para um conjunto de casos de testes valendo 10 pontos, N=M=2.
+  Para um conjunto de casos de testes valendo outros 20 pontos, N=1.
+  Para um conjunto de casos de testes valendo outros 20 pontos, N,M ≤ 100.
+  Para um conjunto de casos de testes valendo outros 50 pontos, nenhuma restrição adicional ( _Atenção, para essa parcial, não é recomendada uma implementação recursiva!_)
 
 ## Exemplos
 
@@ -540,8 +537,8 @@ Seu programa deve imprimir P linhas, cada uma contendo um inteiro representando 
 
 ## Restrições
 
-*   10 ≤ V ≤ 1000
-*   2 ≤ P ≤ 18
+  10 ≤ V ≤ 1000
+  2 ≤ P ≤ 18
 
 ## Exemplos
 
