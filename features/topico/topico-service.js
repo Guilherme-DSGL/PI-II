@@ -31,7 +31,6 @@ class TopicoService {
    */
   static getInstance(topicoModelBuilder) {
     if (!TopicoService.#instance) {
-      console.log("Service No instância");
       TopicoService.#instance = new TopicoService(topicoModelBuilder());
     }
     return TopicoService.#instance;

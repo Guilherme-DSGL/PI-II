@@ -29,7 +29,6 @@ class GoogleGeminiService extends AIService {
    */
   static getInstance() {
     if (!GoogleGeminiService.#instance) {
-      console.log("No instancia");
       GoogleGeminiService.#instance = new GoogleGeminiService(
         new GoogleGenerativeAI(constants.GEMINI_API_KEY)
       );
