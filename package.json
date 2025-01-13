@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "builddev": "node deploy-commands-guild.js",
+    "deploy-guild": "node deploy-commands-guild.js",
     "dev": "npm run subjects && node .",
-    "build": "node deploy-commands-global.js",
+    "deploy-global": "node deploy-commands-global.js",
     "subjects": "node subjects-gen.js"
   },
   "author": "",

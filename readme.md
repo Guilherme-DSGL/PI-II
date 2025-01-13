@@ -24,12 +24,11 @@ Desenvolver um bot no Discord com a biblioteca [discord.js](https://discord.js.o
 
 A base de dados utilizada pelo bot armazenará informações previamente coletadas das questões da OBI, com os seguintes campos:
 
-- `id` (identificador único)
 - `link` (URL da questão)
-- `titulo` (título da questão)
-- `enunciado` (descrição completa da questão)
-- `nível_da_questão` (fácil, médio, difícil)
-- `tipo_de_questão` (categoria ou tipo)
+- `title` (título da questão)
+- `description` (descrição completa da questão)
+- `level` (fácil, médio, difícil)
+- `subject` (Assunto da questão)
 
 ---
 
@@ -50,4 +49,41 @@ A base de dados utilizada pelo bot armazenará informações previamente coletad
 2. **Comando para buscar questões por tema:**  
    O bot precisa permitir que o usuário envie um tema e, em seguida, consultar a base de dados para retornar questões relacionadas.
 
+## Rodando o projeto
+   ### Configure o arquivo .env
+``` env 
+DISCORD_TOKEN= // Token do bot no discord developers
+DISCORD_CLIENT_ID=  // Client da application no discord developers
+DISCORD_GUILD_ID=  // Server que utilizará o bot
+GEMINI_API_KEY=  // KEY DO GEMINI
+```
+
+   ### Configure o arquivo das questões 
+   ``` 
+      db-obi.csv
+   ``` 
+
+   O topo do csv deverá ter a seguinte linha: 
+   ``` 
+   link,title,description,level,subject
+   ``` 
+   Em seguida os dados das questões separados por "," vírgula
+
+   ### Buildando os comandos para o seu servidor 
+
+   ``` 
+      npm run deploy-guild
+   ``` 
+
+   ### Buildando os comandos global (1h de tempo de propragação)
+
+   ``` 
+      npm run deploy-global
+   ``` 
+
+   ### Rodando o servidor 
+
+   ``` 
+      npm run dev
+   ``` 
 ---
