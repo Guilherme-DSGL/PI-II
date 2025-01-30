@@ -25,7 +25,7 @@ async function createTopicPage(interaction, topicName, useEmbed = true) {
   let currentIndex = 0;
   let questions = [];
 
-  //Controi a mensagem
+  //Constroi a mensagem
   const sentMessage = await interaction.editReply(
     await buildReplyBody(
       topicName,
@@ -64,7 +64,7 @@ async function createTopicPage(interaction, topicName, useEmbed = true) {
 
   // Destroi os botões de paginação ao encerrar a interação
   collector.on("end", async () => {
-    await sentMessage.edit({ components: [] });
+    await interaction.editReply({ components: [] });
   });
 }
 

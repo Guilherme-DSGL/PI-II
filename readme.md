@@ -86,4 +86,6 @@ GEMINI_API_KEY=  // KEY DO GEMINI
    ``` 
       npm run dev
    ``` 
+
+      Esse comando além de executar o servidor ele ainda gera o arquvio subject.js que é utilziado para o autocomplete no comando /topico
 ---
