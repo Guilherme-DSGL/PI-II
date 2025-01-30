@@ -1,5 +1,13 @@
 const { REST, Routes } = require("discord.js");
 
+/**
+ *
+ * @param {object} root0
+ * @param {string} root0.token
+ * @param {string} root0.bot_id
+ * @param {string} root0.commands
+ * @param {string | null} root0.server_id
+ */
 async function deployCommands({ token, bot_id, commands, server_id = null }) {
   const rest = new REST().setToken(token);
 

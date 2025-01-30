@@ -8,93 +8,61 @@ const topicoService = require("./topico-service");
 
 const itemsPerPageEmbed = 3;
 const itemsPerPageDefault = 1;
-/**
- * @typedef {import('../../entities/questao.js')} Question
- */
 
 /**
- * Create a paginated topic page interaction with embeds or text replies.
- * @param {import('discord.js').Interaction} interaction - The interaction object from Discord.
- * @param {string} topicName - The name of the topic to fetch questions for.
- * @param {boolean} useEmbed - Flag to determine if the response should use embeds.
+ * @param {import("discord.js").Interaction} interaction
+ * @param {string} topicName
+ * @param {boolean} [useEmbed] - Define se a resposta será enviada como embed.
  */
 async function createTopicPage(interaction, topicName, useEmbed = true) {
-  const currentItemsPerPage = useEmbed
-    ? itemsPerPageEmbed
-    : itemsPerPageDefault;
-  let currentIndex = 0;
-  let questions = [];
+  const paginationState = {
+    currentIndex: 0,
+    currentItemsPerPage: useEmbed ? itemsPerPageEmbed : itemsPerPageDefault,
+    questions: [],
+    useEmbed,
+  };
 
-  //Constroi a mensagem
   const sentMessage = await interaction.editReply(
-    await buildReplyBody(
-      topicName,
-      questions,
-      currentIndex,
-      useEmbed,
-      currentItemsPerPage
-    )
+    await buildReplyBody(topicName, paginationState)
   );
 
-  // pega apenas do usuário que criou a interação
   const filter = (i) => i.user.id === interaction.user.id;
   const collector = sentMessage.createMessageComponentCollector({
     filter,
-    time: 60000, // tempo em milissegundos para destruir interação
+    time: 60000,
   });
 
-  // coleta os eventos de click nos botões
   collector.on("collect", async (i) => {
-    if (i.customId === "next") {
-      currentIndex += currentItemsPerPage;
-    } else if (i.customId === "previous") {
-      currentIndex -= currentItemsPerPage;
-    }
+    paginationState.currentIndex +=
+      i.customId === "next"
+        ? paginationState.currentItemsPerPage
+        : -paginationState.currentItemsPerPage;
 
-    await i.update(
-      await buildReplyBody(
-        topicName,
-        questions,
-        currentIndex,
-        useEmbed,
-        currentItemsPerPage
-      )
-    );
+    await i.update(await buildReplyBody(topicName, paginationState));
   });
 
-  // Destroi os botões de paginação ao encerrar a interação
   collector.on("end", async () => {
     await interaction.editReply({ components: [] });
   });
 }
 
 /**
- * Builds the reply body for the topic page.
- * @param {string} topicName - The name of the topic.
- * @param {Array<Question>} questions - The cached questions for the topic.
- * @param {number} currentIndex - The current index for pagination.
- * @param {boolean} useEmbed - Flag to determine if the response should use embeds.
- * @param currentItemsPerPage
- * @returns {Promise<object>} The reply body containing content and navigation buttons.
+ * @param {string} topicName
+ * @param {PaginationState} paginationState
+ * @returns {Promise<object>} result
  */
-async function buildReplyBody(
-  topicName,
-  questions,
-  currentIndex,
-  useEmbed,
-  currentItemsPerPage
-) {
+async function buildReplyBody(topicName, paginationState) {
   const { reply, hasNextPage, questionsLength } = await createContentResponse(
     topicName,
-    questions,
-    currentIndex,
-    useEmbed,
-    currentItemsPerPage
+    paginationState
   );
 
-  const replyBody = useEmbed ? { embeds: [reply] } : { content: reply };
+  const replyBody = paginationState.useEmbed
+    ? { embeds: [createEmbedResponse(questionsLength, reply)] }
+    : { content: reply };
+
   const buttons = createNavigationButtons(
-    currentIndex,
+    paginationState.currentIndex,
     hasNextPage,
     questionsLength
   );
@@ -103,100 +71,91 @@ async function buildReplyBody(
 }
 
 /**
- * Creates the content response for the topic page.
- * @param {string} topicName - The name of the topic.
- * @param {Array<Question>} questions - The cached questions for the topic.
- * @param {number} currentIndex - The current index for pagination.
- * @param {boolean} useEmbed - Flag to determine if the response should use embeds.
- * @param currentItemsPerPage
- * @returns {Promise<{reply: EmbedBuilder|string, hasNextPage: boolean, questionsLength: number}>} The content response and pagination state.
+ * @param {string} topicName - Nome do tópico.
+ * @param {PaginationState} paginationState
+ * @returns {Promise<{reply: string | EmbedBuilder, hasNextPage: boolean, questionsLength: number}>} response
  */
-async function createContentResponse(
-  topicName,
-  questions,
-  currentIndex,
-  useEmbed,
-  currentItemsPerPage
-) {
+async function createContentResponse(topicName, paginationState) {
   const { result, hasNextPage } = await getPageItems(
     topicName,
-    questions,
-    currentIndex,
-    currentItemsPerPage
+    paginationState
   );
   const questionsLength = result.length;
   const response = { hasNextPage, questionsLength };
 
-  if (questionsLength <= 0) {
-    response.reply = useEmbed
-      ? new EmbedBuilder()
-          .setColor("#FFFF00")
-          .setTitle("Não encontrei :(")
-          .setDescription(
-            `Não encontrei nenhuma questão relacionada ao assunto: ${topicName}`
-          )
-      : `Não encontrei nenhuma questão relacionada ao assunto: ${topicName}`;
-    return response;
-  }
-
-  const fields = buildQuestions(result, currentIndex, useEmbed);
-  response.reply = useEmbed
-    ? new EmbedBuilder()
-        .setColor("#0000FF")
-        .setTitle(`Questões sobre: ${topicName}`)
-        .setDescription(fields)
-    : fields;
+  response.reply =
+    questionsLength > 0
+      ? formatQuestions(result, paginationState.currentIndex)
+      : noResultsMessage(topicName);
 
   return response;
 }
 
 /**
- * Builds the question list as a string for the reply.
- * @param {Array<Question>} questions - The questions to display.
- * @param {number} currentIndex - The current index for pagination.
- * @param {boolean} useEmbed - Flag to determine if the response should use embeds.
- * @returns {string} The formatted list of questions.
+ *
+ * @param {number} questionsLength
+ * @param {string} fields
+ * @returns {Promise<{reply: string | EmbedBuilder}>} response
  */
-function buildQuestions(questions, currentIndex) {
-  return questions
-    .map((item, index) => {
-      const cleanedDescription = item.description
-        .replace(/!\[.*?\]\(.*?\)+/g, "") // Remove links
-        .replace(/---/g, "")
-        .replace(/\s{2,}/g, "\n\n"); // remove spaces
-      return `## Questão #${currentIndex + index + 1}: ${
-        item.title
-      } - **Nível: ${item.level}**
-### Descrição:
-${cleanedDescription.split("## Entrada").at(0).trimStart().trimEnd()}
-
-[🔗 Link para a questão](${item.link})
-      `;
-    })
-    .join("\n");
+function createEmbedResponse(questionsLength, fields) {
+  return questionsLength > 0
+    ? new EmbedBuilder()
+        .setColor("#0000FF")
+        .setTitle(`Questões sobre: ${topicName}`)
+        .setDescription(fields)
+    : new EmbedBuilder()
+        .setColor("#FFFF00")
+        .setTitle("Não encontrei :(")
+        .setDescription(
+          `Não encontrei nenhuma questão relacionada ao assunto: ${topicName}`
+        );
 }
 
 /**
- * Fetches a page of questions from the topic service or cache.
- * @param {string} topicName - The name of the topic.
- * @param {Array<Question>} questions - The cached questions for the topic.
- * @param {number} currentIndex - The current index for pagination.
- * @param currentItemsPerPage
- * @returns {Promise<{result: Array<object>, hasNextPage: boolean}>} The fetched questions and pagination state.
+ * @param {Array<Question>} questions
+ * @param {number} currentIndex
+ * @returns {string | EmbedBuilder} result.
  */
-async function getPageItems(
-  topicName,
-  questions,
-  currentIndex,
-  currentItemsPerPage
-) {
-  let hasNextPage = true;
+function formatQuestions(questions, currentIndex) {
+  const fields = questions
+    .map((item, index) => {
+      const cleanedDescription = item.description
+        .replace(/!\[.*?\]\(.*?\)+/g, "")
+        .replace(/---/g, "")
+        .replace(/\s{2,}/g, "\n\n");
+      return `## Questão #${currentIndex + index + 1}: ${
+        item.title
+      } - **Nível: ${item.level}**\n### Descrição:\n${cleanedDescription
+        .split("## Entrada")
+        .at(0)
+        .trim()}\n\n[🔗 Link para a questão](${item.link})`;
+    })
+    .join("\n");
 
+  return fields;
+}
+
+/**
+ * @param {string} topicName
+ * @returns {string} result.
+ */
+function noResultsMessage(topicName) {
+  return `Não encontrei nenhuma questão relacionada ao assunto: ${topicName}`;
+}
+
+/**
+ * @param {string} topicName
+ * @param {PaginationState} paginationState
+ * @returns {Promise<{result: Question[], hasNextPage: boolean}>} result
+ */
+async function getPageItems(topicName, paginationState) {
+  const { currentIndex, questions, currentItemsPerPage } = paginationState;
   const isInMemoryCache = currentIndex < questions.length;
+
   if (isInMemoryCache) {
     return {
-      result: searchInMemoryCache(questions, currentIndex, currentItemsPerPage),
-      hasNextPage,
+      result: questions.slice(currentIndex, currentIndex + currentItemsPerPage),
+      hasNextPage: true,
     };
   }
 
@@ -205,39 +164,29 @@ async function getPageItems(
     currentIndex,
     currentItemsPerPage
   );
-  if (result.length === 0 && currentIndex > 0) {
-    currentIndex -= currentItemsPerPage;
+
+  if (!result.length && currentIndex > 0) {
+    paginationState.currentIndex -= currentItemsPerPage;
     return {
-      result: searchInMemoryCache(questions, currentIndex, currentItemsPerPage),
+      result: questions.slice(currentIndex - currentItemsPerPage, currentIndex),
       hasNextPage: false,
     };
   }
 
   questions.push(...result);
-  hasNextPage = result.length === currentItemsPerPage;
-
-  return { result, hasNextPage };
-}
-/**
- *
- * @param questions
- * @param currentIndex
- * @param currentItemsPerPage
- */
-function searchInMemoryCache(questions, currentIndex, currentItemsPerPage) {
-  return questions.slice(currentIndex, currentIndex + currentItemsPerPage);
+  return { result, hasNextPage: result.length === currentItemsPerPage };
 }
 
 /**
- * Creates navigation buttons for the pagination.
- * @param {number} currentIndex - The current index for pagination.
- * @param {boolean} hasNextPage - Whether there is a next page available.
- * @param {number} questionsLength - The number of questions
- * @returns {import('discord.js').ActionRowBuilder | null} The action row containing buttons or null if no buttons are needed.
+ * @param {number} currentIndex
+ * @param {boolean} hasNextPage
+ * @param {number} questionsLength
+ * @returns {import('discord.js').ActionRowBuilder | null} row
  */
 function createNavigationButtons(currentIndex, hasNextPage, questionsLength) {
+  if (questionsLength === 0) return null;
+  if (currentIndex <= 0 && !hasNextPage) return null;
   const row = new ActionRowBuilder();
-
   if (questionsLength > 0) {
     row.addComponents(
       new ButtonBuilder()
@@ -246,7 +195,6 @@ function createNavigationButtons(currentIndex, hasNextPage, questionsLength) {
         .setDisabled(currentIndex <= 0)
         .setStyle(ButtonStyle.Primary)
     );
-
     row.addComponents(
       new ButtonBuilder()
         .setCustomId("next")
@@ -255,8 +203,16 @@ function createNavigationButtons(currentIndex, hasNextPage, questionsLength) {
         .setStyle(ButtonStyle.Primary)
     );
   }
-
   return row.components.length ? row : null;
 }
 
 module.exports = { createTopicPage };
+
+/**
+ * @typedef {import("./topico-model").Question} Question
+ * @typedef {object} PaginationState
+ * @property {number} currentIndex - Current index of pagination.
+ * @property {number} currentItemsPerPage -
+ * @property {Array<Question>} questions - Cached questions.
+ * @property {boolean} useEmbed - Flag to determine if the response should be sent as an embed view.
+ */

@@ -1,13 +1,13 @@
-const { Collection } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
 
 /**
  *
- * @param directory
- * @param files
- * @param commands
+ * @param {string} directory
+ * @param {string[]}files
+ * @param {Array<object>}commands
  * @param {boolean} isDeploy
+ * @returns {void}
  */
 function processCommandFiles(directory, files, commands, isDeploy) {
   for (const file of files) {
@@ -16,11 +16,7 @@ function processCommandFiles(directory, files, commands, isDeploy) {
 
     if ("data" in command && "execute" in command) {
       console.warn(`[LOG] LOAD ${file}`);
-      if (isDeploy) {
-        commands.push(command.data.toJSON());
-      } else {
-        commands.set(command.data.name, command);
-      }
+      commands.push(command.data.toJSON());
     } else {
       console.warn(`[SKIP] The file at ${filePath} is missing discord config`);
     }
@@ -29,8 +25,8 @@ function processCommandFiles(directory, files, commands, isDeploy) {
 
 /**
  *
- * @param directory
- * @param commands
+ * @param {fs.PathLike} directory
+ * @param {Array<object>} commands
  * @param {boolean} isDeploy
  */
 function readDirectory(directory, commands, isDeploy) {
@@ -58,17 +54,8 @@ function readDirectory(directory, commands, isDeploy) {
 
 /**
  *
- * @param directory
- */
-function loadCommands(directory) {
-  const commands = new Collection();
-  readDirectory(directory, commands, false);
-  return commands;
-}
-
-/**
- *
- * @param commandsPath
+ * @param {fs.PathLike} commandsPath
+ * @returns {Array<object>} commands
  */
 function loadCommandsForDeploy(commandsPath) {
   const commands = [];
@@ -76,4 +63,4 @@ function loadCommandsForDeploy(commandsPath) {
   return commands;
 }
 
-module.exports = { loadCommandsForDeploy, loadCommands };
+module.exports = { loadCommandsForDeploy };

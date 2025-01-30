@@ -1,8 +1,7 @@
 class Question {
   /**
-   * @param {string} subject The subject
-   * @param {string} title The title
    * @param {string} link
+   * @param {string} title
    * @param {string} description
    * @param {string} level
    * @param {string} subject

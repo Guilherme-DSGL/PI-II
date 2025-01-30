@@ -17,7 +17,7 @@ class QuestaoModel {
   #csvService;
 
   /**
-   * @param {AIService} iaService - Instância do serviço de parser de CSV.
+   * @param {AIService} iaService
    * @param {CsvParserService} csvService
    * @private
    */

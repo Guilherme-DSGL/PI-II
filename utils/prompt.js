@@ -3,15 +3,13 @@
  */
 
 /**
- * Classe base para os prompts.
  * @abstract
  */
 class Prompt {
   promptTemplate;
 
   /**
-   * Construtor da classe Prompt.
-   * @param {string} promptTemplate - O template para o prompt.
+   * @param {string} promptTemplate
    */
   constructor(promptTemplate) {
     if (this.constructor === Prompt) {
@@ -21,10 +19,8 @@ class Prompt {
   }
 
   /**
-   * Método abstrato para construir o prompt.
-   * @param {object} object - O objeto para preencher o template do prompt.
-   * @returns {string} O prompt final.
-   * @throws {Error} Caso o método não seja implementado.
+   * @param {object} object
+   * @throws {Error}
    */
   buildPrompt(object) {
     throw new Error("Método 'buildPrompt' não implementado");
@@ -81,9 +77,8 @@ Nota: Você deve se limitar a sugerir direções e estratégias iniciais. Não d
   }
 
   /**
-   * Constrói o prompt de pergunta substituindo o marcador no template.
-   * @param {Question} question - A pergunta a ser colocada no template.
-   * @returns {string} O prompt com a pergunta preenchida.
+   * @param {Question} question
+   * @returns {string} prompt
    */
   buildPrompt(question) {
     return this.promptTemplate
@@ -94,8 +89,7 @@ Nota: Você deve se limitar a sugerir direções e estratégias iniciais. Não d
   }
 
   /**
-   * Método para obter a instância única.
-   * @returns {QuestionPrompt} A instância única da classe QuestionPrompt.
+   * @returns {QuestionPrompt} singleton questionPrompt.
    */
   static getInstance() {
     if (!QuestionPrompt.instance) {

@@ -32,6 +32,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 });
 
+/**
+ * @param {import('discord.js').Interaction} interaction
+ */
 async function chatInputCommand(interaction) {
   const command = interaction.client.commands.get(interaction.commandName);
 
@@ -57,6 +60,10 @@ async function chatInputCommand(interaction) {
   }
 }
 
+/**
+ *
+ * @param {import('discord.js').Interaction} interaction
+ */
 async function autoComplete(interaction) {
   const command = interaction.client.commands.get(interaction.commandName);
 

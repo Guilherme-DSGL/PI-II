@@ -26,7 +26,7 @@ class TopicoService {
 
   /**
    * Retorna a instância única da classe. Cria a instância caso ela ainda não exista.
-   * @param topicoModelBuilder
+   * @param {Function} topicoModelBuilder
    * @returns {TopicoService} A instância única de TopicoService.
    */
   static getInstance(topicoModelBuilder) {
