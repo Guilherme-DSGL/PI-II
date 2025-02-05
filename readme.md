@@ -134,13 +134,14 @@ GEMINI_API_KEY=  // KEY DO GEMINI // https://aistudio.google.com/app/apikey
       npm run deploy
    ``` 
 
-   ### Rodando o servidor 
+   ### Rodando o servidor
+   Esse comando além de executar o servidor,
+   ele gera o arquvio subject.js que é utiliziado para o autocomplete no comando /topico
 
    ``` 
       npm run dev
    ``` 
 
-      Esse comando além de executar o servidor,
-      ele gera o arquvio subject.js que é utiliziado para o autocomplete no comando /topico
+      
 ---
 
