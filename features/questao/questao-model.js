@@ -64,20 +64,17 @@ class QuestaoModel {
   getQuestionByLink(link) {
     return new Promise((resolve, reject) => {
       try {
-        this.#csvService
-          .createReadStream()
+        const stream = this.#csvService.createReadStream();
+
+        stream
           .on("data", (row) => {
             if (row.link === link) {
               resolve(row);
+              stream.destroy();
             }
           })
-          .on("end", () => {
-            console.log(`CSV file successfully processed`);
-            resolve(null);
-          })
-          .on("error", (error) => {
-            reject(error);
-          });
+          .on("end", () => resolve(null))
+          .on("error", (error) => reject(error));
       } catch (e) {
         reject(e);
       }
