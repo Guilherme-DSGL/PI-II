@@ -58,7 +58,7 @@ async function buildReplyBody(topicName, paginationState) {
   );
 
   const replyBody = paginationState.useEmbed
-    ? { embeds: [createEmbedResponse(questionsLength, reply)] }
+    ? { embeds: [createEmbedResponse(questionsLength, reply, topicName)] }
     : { content: reply };
 
   const buttons = createNavigationButtons(
@@ -95,9 +95,10 @@ async function createContentResponse(topicName, paginationState) {
  *
  * @param {number} questionsLength
  * @param {string} fields
+ * @param {string} topicName
  * @returns {Promise<{reply: string | EmbedBuilder}>} response
  */
-function createEmbedResponse(questionsLength, fields) {
+function createEmbedResponse(questionsLength, fields, topicName) {
   return questionsLength > 0
     ? new EmbedBuilder()
         .setColor("#0000FF")
@@ -185,7 +186,6 @@ async function getPageItems(topicName, paginationState) {
  */
 function createNavigationButtons(currentIndex, hasNextPage, questionsLength) {
   if (questionsLength === 0) return null;
-  if (currentIndex <= 0 && !hasNextPage) return null;
   const row = new ActionRowBuilder();
   if (questionsLength > 0) {
     row.addComponents(
