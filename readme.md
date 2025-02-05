@@ -104,33 +104,34 @@ A aplicação seguirá o padrão **MVC** (Model-View-Controller) com o objetivo 
 ## Rodando o projeto
    ### Configure o arquivo .env
 ``` env 
-DISCORD_TOKEN= // Token do bot no discord developers
-DISCORD_CLIENT_ID=  // Client da application no discord developers
-DISCORD_GUILD_ID=  // Server que utilizará o bot
-GEMINI_API_KEY=  // KEY DO GEMINI
+DISCORD_TOKEN= // Token do bot no discord developers https://discord.com/developers/applications/[clientID]/bot
+DISCORD_CLIENT_ID=  // Client da application no discord developers https://discord.com/developers/applications
+DISCORD_GUILD_ID=  // Id do server de testes que utilizará o bot
+GEMINI_API_KEY=  // KEY DO GEMINI // https://aistudio.google.com/app/apikey
 ```
 
    ### Configure o arquivo das questões 
+   nome do arquivo:
    ``` 
-      db-obi.csv
+   db-obi.csv
    ``` 
 
-   O topo do csv deverá ter a seguinte linha: 
+   O topo do csv deverá ter a seguinte linha abaixo, em seguida os dados das questões deverão ser separados por "," vírgula.
    ``` 
    link,title,description,level,subject
    ``` 
-   Em seguida os dados das questões separados por "," vírgula
 
-   ### Buildando os comandos para o seu servidor 
+   ### Buildando os comandos para o seu servidor.
+   Utiliza o DISCORD_GUILD_ID para atualizar o bot em um servidor de testes
 
    ``` 
       npm run deploy-guild
    ``` 
 
-   ### Buildando os comandos global (1h de tempo de propragação)
+   ### Buildando os comandos global (em média 1h de tempo de propragação)
 
    ``` 
-      npm run deploy-global
+      npm run deploy
    ``` 
 
    ### Rodando o servidor 
@@ -139,6 +140,7 @@ GEMINI_API_KEY=  // KEY DO GEMINI
       npm run dev
    ``` 
 
-      Esse comando além de executar o servidor ele ainda gera o arquvio subject.js que é utiliziado para o autocomplete no comando /topico
+      Esse comando além de executar o servidor,
+      ele gera o arquvio subject.js que é utiliziado para o autocomplete no comando /topico
 ---
 
