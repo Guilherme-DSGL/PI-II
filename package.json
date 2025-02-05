@@ -1,0 +1,28 @@
+{
+  "name": "pi-ii",
+  "version": "1.0.0",
+  "description": "Projeto criado para auxiliar os alunos de escolas das regiões de Crateús, Russas e arredores, que utilizam o Discord como plataforma de estudos para a Olimpíada Brasileira de Informática (OBI).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy-guild": "node deploy-commands-guild.js",
+    "dev": "npm run subjects && node .",
+    "deploy": "node deploy-commands-global.js",
+    "subjects": "node subjects-gen.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "csv-parser": "^3.1.0",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.7",
+    "install": "^0.13.0",
+    "npm": "^10.9.2",
+    "pi-ii": "file:"
+  },
+  "devDependencies": {
+    "eslint": "^9.17.0",
+    "eslint-plugin-jsdoc": "^50.6.1"
+  }
+}

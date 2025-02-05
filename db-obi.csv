@@ -1,0 +1,573 @@
+link,title,description,level,subject
+https://olimpiada.ic.unicamp.br/pratique/pj/2021/f3/ogro/,Ogro,"
+O Ogro da Nlogônia está aprendendo a contar até dez usando os dedos das mãos (assim como os humanos, ele possui 2 mãos com 5 dedos cada)). Ele está treinando muito, mas gostaria de ter um aplicativo para ajudá-lo nessa empreitada. O Ogro aprendeu a mostrar a representação de um número com as mãos da seguinte forma:
+
+  se o número pode ser representado usando apenas uma das mãos, o Ogro usa os dedos na mão esquerda e mantém a mão direita fechada.
+  caso contrário, o Ogro mostra todos os cinco dedos da mão esquerda, e na mão direita mostra os dedos que faltam para representar o número.
+
+Por exemplo, para o número 3, o Ogro mostra:
+
+III 
+
+onde cada letra I representa um dedo e a mão fechada é representada pelo símbolo \`\*' (asterisco). Para o número 8 o Ogro mostra:
+
+IIIII III
+
+Sua tarefa é ajudar o Ogro em seu treinamento, escrevendo um programa para, dado um número entre 0 e 10, mostrar a configuração de dedos correspondente a esse número, de acordo com as regras acima.
+
+## Entrada
+
+A primeira e única linha da entrada contém um inteiro N, o número que deve ser representado com os dedos das mãos.
+
+## Saída
+
+Seu programa deve produzir duas linhas na saída. A primeira linha deve conter a representação dos dedos da mão esquerda, a segunda linha deve conter a representação dos dedos da mão direita. A letra \`I' deve ser usada para representar um dedo, e o caractere \`\\texttt{\*' (asterisco) deve ser usado para representar a mão fechada (isto é, nenhum dedo mostrado).}
+
+## Restrições
+
+  0 ≤ N ≤ 10
+
+## Exemplos
+
+**Entrada**
+
+8
+
+**Saída**
+
+IIIII
+III
+	
+
+**Entrada**
+
+3
+
+**Saída**
+
+III
+
+	
+
+**Entrada**
+
+0
+
+**Saída**
+",Difícil,Algoritmos de grafos
+https://olimpiada.ic.unicamp.br/pratique/pj/2021/f3/casamento/,Casamento de Inteiros,"Vamos definir a operação de _casamento_ de dois números inteiros A e B da seguinte forma:
+
+inicialmente fazemos A e B terem o mesmo número de dígitos, adicionando zeros à esquerda conforme necessário;
+então cada dígito de A (do menos significativo ao mais significativo) é comparado com o dígito correspondente de B, e o dígito de menor valor é eliminado do número a que pertence (se os dígitos são iguais nenhum é eliminado).
+o resultado da operação de casamento é o par de números inteiros formados pelos dígitos remanescentes de A e B. No caso de não haver digito remanescente para um dos números, o resultado para esse número é -1.
+
+Por exemplo, considere o casamento de 69961 com 487920:
+
+O resultado do casamento é o par de números 489 e 9961. Dados dois números inteiros, sua tarefa é determinar o resultado do casamento desses dois números.
+
+## Entrada
+
+A primeira linha da entrada contém um número inteiro A, a segunda linha contém um número inteiro B.
+
+## Saída
+
+Seu programa deve produzir uma única linha, contendo os dois números inteiros produzidos pelo casamento dos números dados, em ordem não decrescente.
+
+## Restrições
+
+1 ≤ A ≤ 109
+1 ≤ B ≤ 109
+
+## Informações sobre a pontuação
+
+Para um conjunto de casos de testes valendo 22 pontos, 100 ≤ A ≤ 999 e 100 ≤ B ≤ 999.
+Para um conjunto de casos de testes valendo outros 78 pontos, nenhuma restrição adicional.
+
+## Exemplos
+
+**Entrada**
+
+69961
+487920
+
+**Saída**
+
+489 9961
+        
+
+**Entrada**
+
+5678
+1234
+
+**Saída**
+
+\-1 5678
+        
+
+**Entrada**
+
+21
+12
+
+**Saída**
+
+2 2
+        
+
+**Entrada**
+
+200
+100
+
+**Saída**
+
+0 200",Difícil,Algoritmos de grafos
+https://olimpiada.ic.unicamp.br/pratique/pj/2021/f3/plano/,Plano,"Tio Chico é o dono de um estacionamento para carros, localizado perto de um estádio de futebol. O estacionamento tem N vagas numeradas de 1 a N e em dias de jogo tem muita procura, podendo até mesmo lotar. Tio Chico é um tanto excêntrico, e decidiu que, no próximo jogo, deverá ser obedecida uma nova regra, que em termos gerais consiste no seguinte: o carro do i-ésimo cliente a chegar deverá ocupar uma vaga cujo número está dentro de um certo intervalo. Esses intervalos foram definidos pelo Tio Chico de acordo com alguns critérios, como espaços para manobra, sombreamento, etc. Mais especificamente, para o i-ésimo cliente que chegar, Tio Chico definiu um número V\_i e determinou que o automóvel desse cliente deve ocupar uma vaga ainda não ocupada cujo número está dentro do intervalo 1,2,\\ldots,V\_i. Vamos chamar de _plano de estacionamento_ a lista dos valores V\_i, para todos os clientes i. Se um cliente chegar e não puder estacionar o carro de acordo com o plano de estacionamento, esse cliente não será atendido, e o estacionamento não aceitará o carro de nenhum outro cliente até o final do jogo. Você ficou muito preocupado com essa esquisitice to Tio Chico, e conhecendo o plano de estacionamento que foi definido, precisa determinar qual o maior número de clientes que poderão estacionar.
+
+## Entrada
+
+A primeira linha da entrada contém um inteiro N, o número de vagas do estacionamento. A segunda linha contém um inteiro M, o número esperado de clientes. Cada uma das M linhas seguintes contém um inteiro V\_i, o número definido no plano de estacionamento para o i-ésimo cliente a chegar.
+
+## Saída
+
+Se programa deve produzir uma única linha, contendo um único inteiro, o número máximo de carros que poderão estacionar de acordo com o plano de estacionamento de Tio Chico.
+
+## Restrições
+
+1 ≤ N ≤ 100 000
+1 ≤ M ≤ 100 000
+1 ≤ V\_i ≤ N, para 1 ≤ i ≤ N
+
+## Informações sobre a pontuação
+
+Para um conjunto de casos de testes valendo 40 pontos, N ≤ 2000 e M ≤ 2000.
+Para um conjunto de casos de testes valendo outros 60 pontos, nenhuma restrição adicional.
+
+## Exemplos
+
+**Entrada**
+
+4
+3
+4
+1
+1
+
+**Saída**
+
+2
+	
+
+**Entrada**
+
+4
+6
+2
+2
+3
+3
+4
+4
+
+**Saída**
+
+3",Difícil,Geometria Computacional
+https://olimpiada.ic.unicamp.br/pratique/pj/2021/f3/sapo/,Sapo,"O Sr. Sapo mora num lago de formato retangular dividido em um reticulado de células quadradas de um metro de lado. Algumas das células são pedras que estão acima do nível da água. O Sr. Sapo é muito atlético e pode saltar a distâncias de até três metros, mas curiosamente ele só pode saltar nas direções paralelas aos lados do lago. A figura (a) abaixo mostra um lago, e a figura (b) uma sequência de pulos do Sr. Sapo.
+
+O Sr. Sapo está em uma pedra e quer ir visitar sua namorada que está em outra pedra. Ele está com pressa e não quer se molhar, portanto quer chegar ao seu destino pulando de pedra em pedra, sem cair na água. Dados o mapa do lago, a pedra em que o Sr. Sapo está e a pedra em que a sua namorada está, determine se é possível ele chegar ao seu destino sem se molhar.
+
+## Entrada
+
+A primeira contém dois inteiros N, M, respectivamente a largura e o comprimento do lago em metros (ou seja, o lago é composto por N colunas e M linhas de células quadradas de 1m de lado). As colunas são numeradas de 1 a N e as linhas são numeradas de 1 a M. A segunda linha contém um inteiro P, o número de células que são pedras. Cada uma das P linhas seguintes contém dois inteiros C\_{i e L\_{i}, respectivamente o número da coluna e o número da linha de uma célula que é pedra. A linha seguinte descreve a célula em que o Sr. Sapo está e contém dois inteiros S\_{C} e S\_{L}, respectivamente a coluna e a linha da célula. A linha seguinte descreve a célula em que está a namorada do Sr. Sapo e contém dois inteiros R\_{C} e R\_{L}, respectivamente a coluna e a linha da célula.}
+
+## Saída
+
+Seu programa deve produzir uma única linha na saída, contendo um único caractere, que deve ser \`S' se for possível o Sr. Sapo chegar ao destino sem se molhar, ou \`\\texttt{N' caso contrário.}
+
+## Restrições
+
+3 ≤ N ≤ 100
+1 ≤ M ≤ 100
+2 ≤ P ≤ N\\times M
+1 ≤ C\_i ≤ M e 1 ≤ L\_i ≤ M para 1 ≤ i ≤ P
+1 ≤ S\_{C} ≤ N e 1 ≤ S\_{L} ≤ M
+1 ≤ R\_{C} ≤ N e 1 ≤ R\_{L} ≤ M
+As posições do Sr. Sapo e da sua namorada são distintas e ambas são posições de pedras especificadas na entrada.
+
+## Informações sobre a pontuação
+
+Para um conjunto de casos de testes valendo 14 pontos, M = 1
+Para um conjunto de casos de testes valendo outros 16 pontos, para a pedra em que o Sr. Sapo está inicialmente, há no máximo uma outra pedra para a qual ele pode saltar, e para todas as outras pedras, há no máximo duas para a qual ele pode saltar (ou seja, se o Sr. Sapo consegue chegar ao destino, há um único caminho de pedras que podem ser usadas, e esse caminho não tem ""bifurcações"").
+Para um conjunto de casos de testes valendo outros 70 pontos, nenhuma restrição adicional.
+
+## Exemplos
+
+**Entrada**
+
+4 5
+6
+1 1
+2 2
+1 4
+3 4
+3 5
+4 5
+1 1
+4 5
+
+**Saída**
+
+S
+	
+
+**Entrada**
+
+4 5
+6
+2 1
+2 5
+3 4
+4 1
+4 3
+4 5
+3 4
+2 1
+
+**Saída**
+
+N",Médio,Algoritmos de busca
+https://olimpiada.ic.unicamp.br/pratique/pj/2020/f3/calorias/,Calorias,"Um aplicativo de celular está sendo desenvolvido para, a partir da foto de um prato contendo uma refeição, estimar a quantidade de calorias da refeição. O algoritmo de inteligência artificial (IA) utilizado no aplicativo produz três números inteiros, E1, E2 e E3. E1 é a quantidade mínima de calorias estimada e E2 a quantidade máxima de calorias estimada para a refeição da fotografia. E3 só tem significado se a diferença entre as quantidades estimadas mínima e máxima são maiores do que um valor pré-definido X; nesse caso, E3 é a quantidade de calorias estimada por um método alternativo. Depois de vários testes, os desenvolvedores do aplicativo determinaram que os melhores resultados são obtidos usando as estimativas produzidas pelo algoritmo de IA da seguinte forma:
+
+se a diferença entre E1 e E2 for menor ou igual ao valor de X, o aplicativo deve mostrar ao usuário o valor de E2 como o número de calorias;
+se a diferença entre E1 e E2 for maior do que o valor de X, o aplicativo deve mostrar ao usuário o valor de E3 como o número de calorias;
+
+Dados o valor de X e as três estimativas produzidas pelo algoritmo de IA, escreva um programa que determine o resultado que deve ser mostrado para o usuário.
+
+## Entrada
+
+A primeira linha da entrada contém um inteiro, o valor de E1. A segunda linha contém um inteiro, o valor de E2. A terceira linha contém um inteiro, o valor de E3. A quarta linha contém um inteiro, o valor de X.
+
+## Saída
+
+Seu programa deve produzir uma única linha, contendo um único inteiro, o resultado que deve ser mostrado para o usuário do aplicativo.
+
+## Restrições
+0 ≤ E1 ≤ E2 ≤ 10000
+0 ≤ E3 ≤ 10000
+0 ≤ X ≤ 10000
+
+## Exemplos
+
+**Entrada**
+
+1500
+2000
+2500
+1000
+
+**Saída**
+
+2000
+	
+
+**Entrada**
+
+1000
+1300
+1050
+200
+
+**Saída**
+
+1050",Médio,Algoritmos gulosos
+https://olimpiada.ic.unicamp.br/pratique/pj/2020/f3/atlanta/,Atlanta,"_Nome do arquivo: atlanta.x, onde x deve ser c, cpp, java, js ou py_
+
+Documentos recentemente encontrados por pesquisadores mostram que na Sala de Audiências do palácio Real na cidade perdida de Atlanta o piso era formado por ladrilhos 20 cm x 20 cm. Ladrilhos de duas cores foram usados: o centro da Sala era formado por ladrilhos brancos e exatamente uma fileira de ladrilhos azuis foram colocados em cada lateral do Sala, como nas figuras abaixo.
+
+Os pesquisadores não encontraram vestígios da Sala de Audiências (nem da cidade de Atlanta!), mas os documentos recentes, se forem autênticos, indicam também a quantidade de ladrilhos que foram utilizados no piso da Sala.
+
+Sua tarefa é, dadas as quantidades de azulejos azuis e brancos, determinar as dimensões da Sala de Audiências.
+
+## Entrada
+
+A primeira linha da entrada contém um inteiro A, o número de azulejos azuis. A segunda linha contém um número inteiro B, o número de azulejos brancos.
+
+## Saída
+
+Seu programa deve produzir uma única linha, contendo dois números inteiros, representando as dimensões da Sala (largura e comprimento). Se a largura for diferente do comprimento, seu programa deve imprimir primeiro a menor dimensão, seguida da maior dimensão. Se as quantidades de azulejos não forem corretas para construir o piso da Sala no formato descrito acima, seu programa deve imprimir ""\-1 -1"".
+
+## Restrições
+
+1 ≤ A ≤ 106
+1 ≤ B ≤ 106
+
+## Exemplos
+
+**Entrada**
+
+10
+2
+
+**Saída**
+
+3 4
+        
+
+**Entrada**
+
+8
+2
+
+**Saída**
+
+\-1 -1
+        
+
+**Entrada**
+
+3996
+996004
+
+**Saída**
+
+1000 1000",Difícil,Algoritmos de grafos
+https://olimpiada.ic.unicamp.br/pratique/pj/2020/f3/celular/,Celular,"_Nome do arquivo: celular.x, onde x deve ser c, cpp, java, js ou py_
+
+Para atrair mais turistas, o governo decidiu permitir a instalação de uma rede de telefonia celular no paradisíaco arquipélago de Logarium. O arquipélago tem muitas ilhas no formato circular, todas com no máximo 1 km de diâmetro.
+
+Exatamente uma torre de celular será instalada no centro de cada uma das ilhas. Todas as torres serão idênticas e terão o mesmo alcance; o _alcance_ é a distância máxima da torre que um equipamento (telefone ou outra torre) pode estar de forma que a comunição seja possível.
+
+O governo deseja que a rede de telefonia celular garanta a _cobertura total_ do arquipélago, ou seja, deve ser possível a um usuário comunicar-se com qualquer outro usuário no arquipélago, mesmo que a comunicação tenha que passar por mais de uma torre.
+
+Há vários tipos de torres disponíveis no mercado, cada tipo com um alcance. O governo recebeu uma proposta atrativa de uma empresa e deseja saber se o alcance da torre ofertada permitirá a cobertura total do arquipélago.
+
+Dadas a localização das torres e o alcance da torre ofertada, escreva um programa para determinar se a torre ofertada permite a cobertura total do arquipélago.
+
+## Entrada
+
+A primeira linha da entrada contém um inteiro N indicando o número de ilhas do arquipélago. Cada uma das N linhas seguintes contém dois inteiros Xi e Yi, as coordenadas da i-ésima torre. Não existem duas torres com as mesmas coordenadas. A última linha da entrada contém um inteiro A indicando o alcance da torre.
+
+## Saída
+
+Seu programa deve produzir uma única linha na saída, contendo um único caractere, que deve ser S se a torre permite a cobertura total ou N caso contrário.
+
+## Restrições
+
+2 ≤ N ≤ 10000
+0 ≤ Xi, Yi ≤ 1000, para 1 ≤ i ≤ N
+1 ≤ A ≤ 10000
+
+## Informações sobre a pontuação
+
+Para um conjunto de casos de testes valendo 20 pontos, Yi = 0 para 1 ≤ i ≤ N.
+Para um conjunto de casos de testes valendo 80 pontos adicionais, nenhuma outra restrição.
+
+## Exemplos
+
+**Entrada**
+
+3
+200 200
+400 400
+600 600
+200
+
+**Saída**
+
+N
+        
+
+**Entrada**
+
+5
+10 10
+10 30
+30 10
+30 30
+20 20
+20
+
+**Saída**
+
+S
+        
+
+**Entrada**
+
+3
+0 0
+40 0
+0 30
+49
+
+**Saída**
+
+S",Médio,Algoritmos de busca
+https://olimpiada.ic.unicamp.br/pratique/pj/2020/f3/torre/,Torre,"_Nome do arquivo: torre.x, onde x deve ser c, cpp, java, js ou py_
+
+Hortência está brincando de construir uma torre com dados de seis faces. Os dados são similares aos dados comuns utilizados em jogos, com as faces estampadas com valores de 1 a 6. Mas os dados usados por Hortência têm uma grande diferença em relação aos dados comuns: enquanto em dados comuns a soma dos valores em faces opostas é sempre sete, para os dados de Hortência os valores em faces opostas nem sempre têm soma sete.
+
+Hortência está criando a torre empilhando os seus dados, obedecendo às seguintes regras:
+
+1.  Seja X dado que está colocado imediatamente em cima de um dado Y. Então o valor da face inferior de X deve ser igual ao valor da face superior de Y. Por exemplo, se a pilha tem três dados R, S e T, empilhados nessa ordem de baixo para cima, então o valor da face superior de R deve ser igual ao valor da face inferior de S, e o valor da face superior de S deve ser igual ao valor da face inferior de T.
+2.  Os dados devem ter suas laterais alinhadas, ou seja, a torre formada tem exatamente quatro lados, correspondendo aos lados dos dados.
+
+Hortência quer criar uma torre tal que a soma dos valores de um dos lados da torre seja a maior possível. Note que após empilhar os dados obedecendo à regra (1), Hortência pode girar cada dado horizontalmente de forma independente, obedecendo à regra (2), para alterar os valores das somas dos lados.
+
+Dadas as informações sobre os dados utilizados na torre, escreva um programa para determinar o maior valor possível para a soma de um dos lados da torre.
+
+## Entrada
+
+A primeira linha da entrada contém um inteiro N, o número de dados. Cada uma das N linhas seguintes descreve um dado e contém seis inteiros A, B, C, D, E e F, identificando os valores dos lados do dado, conforme a figura abaixo.
+
+![](/static/img/task_images/provaf3pj_torre.png)
+
+## Saída
+
+Seu programa deve produzir uma única linha, contendo um único inteiro, o maior valor possível para a soma de um dos lados da torre.
+
+## Restrições
+
+  1 ≤ N ≤ 1000
+  1 ≤ A, B, C, D, E, F ≤ 6, todos distintos em um dado.
+
+## Exemplos
+
+**Entrada**
+
+2
+1 2 3 4 5 6
+1 2 6 4 5 3
+
+**Saída**
+
+12
+        
+
+**Entrada**
+
+5
+4 6 1 5 3 2
+1 3 2 4 6 5
+5 3 1 4 2 6
+6 1 5 2 4 3
+4 6 1 5 3 2
+
+**Saída**
+
+28",Difícil,Algoritmos de busca
+https://olimpiada.ic.unicamp.br/pratique/pj/2019/f3/manchas/,Manchas,"_Nome do arquivo: manchas.x, onde x deve ser c, cpp, java, js ou py_
+
+O laboratório de dermatologia da Linearlândia está implementando um software para contar o número de manchas presentes numa imagem digital de N por M pixels. Cada pixel na imagem é preto ou branco e dois pixels pretos distintos A e B pertencem à mesma mancha se e somente se: existir uma sequência de pixels \[P1,P2,...,Pk\], onde k ≥ 2, A=P1, B=Pk e para todo 1 ≤ ii é ortogonalmente adjacente a Pi+1 (Pi imediatamente acima, abaixo, à esquerda ou à direita de Pi+1).
+
+A figura acima, para N=8 e M=9, ilustra uma imagem digital onde existem oito manchas. Dada a imagem, seu programa deve contar o número de manchas presentes.
+
+## Entrada
+
+A primeira linha da entrada contém dois inteiros N e M, representando, respectivamente, o número de linhas e colunas da imagem. As N linhas seguintes contêm, cada uma, M inteiros P representando os pixels da imagem.
+
+## Saída
+
+Seu programa deve imprimir uma linha contendo um inteiro, o número de manchas na imagem.
+
+## Restrições
+
+  1 ≤ N ≤ 1000
+  1 ≤ M ≤ 1000
+  O valor de P é 1, representando um pixel preto, ou 0, representando um pixel branco.
+
+## Informações sobre a pontuação
+
+  Para um conjunto de casos de testes valendo 10 pontos, N=M=2.
+  Para um conjunto de casos de testes valendo outros 20 pontos, N=1.
+  Para um conjunto de casos de testes valendo outros 20 pontos, N,M ≤ 100.
+  Para um conjunto de casos de testes valendo outros 50 pontos, nenhuma restrição adicional ( _Atenção, para essa parcial, não é recomendada uma implementação recursiva!_)
+
+## Exemplos
+
+**Entrada**
+
+8 9
+1 0 0 0 0 0 1 1 1
+1 1 0 1 1 1 0 1 1
+1 0 0 0 0 1 0 1 0
+0 0 1 0 0 1 1 1 0
+0 1 1 0 0 0 0 1 0
+0 1 0 0 1 1 0 0 0
+0 0 0 1 0 1 0 0 1
+1 1 1 0 0 0 0 1 0
+
+**Saída**
+
+8
+	
+
+**Entrada**
+
+1 1
+0
+
+**Saída**
+
+0
+	
+
+**Entrada**
+
+1 10
+0 0 1 0 1 1 1 0 1 0
+
+**Saída**
+
+3",Médio,Algoritmos gulosos
+https://olimpiada.ic.unicamp.br/pratique/pj/2019/f3/parcelamento/,Parcelamento,"_Nome do arquivo: parcelamento.x, onde x deve ser c, cpp, java, js ou py_
+
+Pedrinho está implementando o sistema de controle de pagamentos parcelados de uma grande empresa de cartão de crédito digital. Os clientes podem parcelar as compras sem juros no cartão, em até 18 vezes. Quando o valor V da compra é divisível pelo número P de parcelas que o cliente escolhe, todas as parcelas terão o mesmo valor. Por exemplo, se o cliente comprar um livro de V=30 reais em P=6 vezes, então as parcelas terão valores: 5, 5, 5, 5, 5 e 5. Mas se o valor da compra não for divisível pelo número de parcelas será preciso fazer um ajuste, pois a empresa quer que todas as parcelas tenham sempre um valor inteiro e somem no total, claro, o valor exato da compra. O que Pedrinho decidiu foi distribuir o resto da divisão de V por P igualmente entre as parcelas iniciais. Por exemplo, se a compra for de V=45 e o número de parcelas for P=7, então as parcelas terão valores: 7, 7, 7, 6, 6, 6 e 6. Quer dizer, como o resto da divisão de 45 por 7 é 3, então as 3 parcelas iniciais devem ter valor um real maior do que as 4 parcelas finais.
+
+Você precisa ajudar Pedrinho e escrever um programa que, dado o valor da compra e o número de parcelas, imprima os valores de cada parcela.
+
+## Entrada
+
+A primeira linha da entrada contém um inteiro V, representando o valor da compra. A segunda linha da entrada contém um inteiro P, indicando o número de parcelas.
+
+## Saída
+
+Seu programa deve imprimir P linhas, cada uma contendo um inteiro representando o valor de uma parcela. A i-ésima linha deve conter o valor da i-ésima parcela, para 1 ≤ i ≤ P, de acordo com o que Pedrinho decidiu.
+
+## Restrições
+
+  10 ≤ V ≤ 1000
+  2 ≤ P ≤ 18
+
+## Exemplos
+
+**Entrada**
+
+30
+6
+
+**Saída**
+
+5
+5
+5
+5
+5
+5
+	
+
+**Entrada**
+
+45
+7
+
+**Saída**
+
+7
+7
+7
+6
+6
+6
+6",Fácil,Algoritmos gulosos

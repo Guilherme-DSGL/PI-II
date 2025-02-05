@@ -84,15 +84,60 @@ A aplicação seguirá o padrão **MVC** (Model-View-Controller) com o objetivo 
 
 ---
 
-## 🎨 Protótipo no Figma
+## 🛠️ Tecnologias Utilizadas
 
-Foi desenvolvido um protótipo do funcionamento das funcionalidades nas telas do discord:
-
-[🔗 Protótipo Bot no Figma](https://www.figma.com/design/QkJkW1DnlGrsD1ZQrcPVEt/Prot%C3%B3tipo-Bot)
+- **[Discord.js](https://discord.js.org/):** Biblioteca Node.js para criar bots no Discord.
+- **API Gemini (Google Bard):** Para geração de insights e dicas personalizados.
+- **Node.js:** Ambiente de execução.
+- **Banco de Dados:** Estrutura para armazenar informações das questões da OBI.
 
 ---
 
-## 🗄️ Diagrama de Classes 
-![Diagrama de Classes](./doc/DiagramaDeClasses.png)
+## 📋 Requisitos do Projeto
 
+1. **Comando para buscar insights de questões:**  
+   O bot precisa processar o link enviado pelo usuário, localizar a questão correspondente na base de dados e consultar a API Gemini para retornar as dicas.
+
+2. **Comando para buscar questões por tema:**  
+   O bot precisa permitir que o usuário envie um tema e, em seguida, consultar a base de dados para retornar questões relacionadas.
+
+## Rodando o projeto
+   ### Configure o arquivo .env
+``` env 
+DISCORD_TOKEN= // Token do bot no discord developers
+DISCORD_CLIENT_ID=  // Client da application no discord developers
+DISCORD_GUILD_ID=  // Server que utilizará o bot
+GEMINI_API_KEY=  // KEY DO GEMINI
+```
+
+   ### Configure o arquivo das questões 
+   ``` 
+      db-obi.csv
+   ``` 
+
+   O topo do csv deverá ter a seguinte linha: 
+   ``` 
+   link,title,description,level,subject
+   ``` 
+   Em seguida os dados das questões separados por "," vírgula
+
+   ### Buildando os comandos para o seu servidor 
+
+   ``` 
+      npm run deploy-guild
+   ``` 
+
+   ### Buildando os comandos global (1h de tempo de propragação)
+
+   ``` 
+      npm run deploy-global
+   ``` 
+
+   ### Rodando o servidor 
+
+   ``` 
+      npm run dev
+   ``` 
+
+      Esse comando além de executar o servidor ele ainda gera o arquvio subject.js que é utilziado para o autocomplete no comando /topico
 ---
