@@ -19,7 +19,7 @@ module.exports = {
       await interaction.deferReply();
       const topicName = interaction.options.getString("nometopico");
 
-      await topicoPage.createTopicPage(interaction, topicName, false);
+      await topicoPage.createTopicPage(interaction, topicName, true);
     } catch (e) {
       console.error(e);
       await interaction.edit("Não foi possível processar a solicitação.");

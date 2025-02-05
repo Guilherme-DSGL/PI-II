@@ -52,7 +52,8 @@ Ajude o estudante a dar os primeiros passos na resolução do problema, fornecen
 ---
 
 ## Instruções para Resposta
-
+**Muito Importante:** Seja direto e sucinto, evite espaços em brancos desnecessários, a sua resposta nunca deve ultrapassar 1500 caracteres, incluindo espaços, quebras de linha e notações do markdown.
+Tenha em mente que a clareza e objetividade são essenciais para fornecer uma ajuda eficaz sem exceder esse limite, sua resposta será posto em uma string que não deve ultrpassar esse limite.
 A resposta deve conter:
 
 ### **1. Compreensão do Problema**
@@ -95,8 +96,6 @@ A resposta deve conter:
 ✔ Certifique-se de que \`N - 5\` não resulte em valores negativos.
 
 ---
-
-**Nota:** A resposta deve ser objetiva e clara, sem fornecer a solução completa. O limite máximo é **1750 caracteres**, incluindo espaços e quebras de linha.
 `
     );
   }

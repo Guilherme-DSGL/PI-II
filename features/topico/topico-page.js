@@ -5,9 +5,10 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const topicoService = require("./topico-service");
+const { PRIMARY_COLOR } = require("../../utils/consts");
 
-const itemsPerPageEmbed = 3;
-const itemsPerPageDefault = 1;
+const itemsPerPageEmbed = 1; // Visualização embed
+const itemsPerPageDefault = 1; // Sem embed
 
 /**
  * @param {import("discord.js").Interaction} interaction
@@ -58,8 +59,8 @@ async function buildReplyBody(topicName, paginationState) {
   );
 
   const replyBody = paginationState.useEmbed
-    ? { embeds: [createEmbedResponse(questionsLength, reply, topicName)] }
-    : { content: reply };
+    ? { embeds: [...createEmbedResponse(questionsLength, reply, topicName)] }
+    : { content: reply.join("\n") };
 
   const buttons = createNavigationButtons(
     paginationState.currentIndex,
@@ -73,7 +74,7 @@ async function buildReplyBody(topicName, paginationState) {
 /**
  * @param {string} topicName - Nome do tópico.
  * @param {PaginationState} paginationState
- * @returns {Promise<{reply: string | EmbedBuilder, hasNextPage: boolean, questionsLength: number}>} response
+ * @returns {Promise<{reply: string[] | EmbedBuilder, hasNextPage: boolean, questionsLength: number}>} response
  */
 async function createContentResponse(topicName, paginationState) {
   const { result, hasNextPage } = await getPageItems(
@@ -100,10 +101,12 @@ async function createContentResponse(topicName, paginationState) {
  */
 function createEmbedResponse(questionsLength, fields, topicName) {
   return questionsLength > 0
-    ? new EmbedBuilder()
-        .setColor("#0000FF")
-        .setTitle(`Questões sobre: ${topicName}`)
-        .setDescription(fields)
+    ? fields.map((field) =>
+        new EmbedBuilder()
+          .setColor(PRIMARY_COLOR)
+          .setTitle(`Questões sobre: ${topicName}`)
+          .setDescription(field)
+      )
     : new EmbedBuilder()
         .setColor("#FFFF00")
         .setTitle("Não encontrei :(")
@@ -118,20 +121,18 @@ function createEmbedResponse(questionsLength, fields, topicName) {
  * @returns {string | EmbedBuilder} result.
  */
 function formatQuestions(questions, currentIndex) {
-  const fields = questions
-    .map((item, index) => {
-      const cleanedDescription = item.description
-        .replace(/!\[.*?\]\(.*?\)+/g, "")
-        .replace(/---/g, "")
-        .replace(/\s{2,}/g, "\n\n");
-      return `## Questão #${currentIndex + index + 1}: ${
-        item.title
-      } - **Nível: ${item.level}**\n### Descrição:\n${cleanedDescription
-        .split("## Entrada")
-        .at(0)
-        .trim()}\n\n[🔗 Link para a questão](${item.link})`;
-    })
-    .join("\n");
+  const fields = questions.map((item, index) => {
+    const cleanedDescription = item.description
+      .replace(/!\[.*?\]\(.*?\)+/g, "")
+      .replace(/---/g, "")
+      .replace(/\s{2,}/g, "\n\n");
+    return `## Questão #${currentIndex + index + 1}: ${item.title} - **Nível: ${
+      item.level
+    }**\n### Descrição:\n${cleanedDescription
+      .split("## Exemplos")
+      .at(0)
+      .trim()}\n\n[🔗 Link para a questão](${item.link})`;
+  });
 
   return fields;
 }

@@ -1,5 +1,6 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const questaoService = require("./questao-service");
+const { PRIMARY_COLOR } = require("../../utils/consts");
 const command = new SlashCommandBuilder()
   .setName("questao")
   .setDescription("Retorna dicas e insigths das questões da OBI")
@@ -26,13 +27,19 @@ module.exports = {
       const subjectMarkdown = `### Assunto: ${question.subject}\n`;
       const linkMarkdown = `[🔗 Acesse a questão aqui](${question.link})\n\n`;
 
-      await interaction.editReply(
-        `${titleMarkdown}${subjectMarkdown}${linkMarkdown}${apiResponse}`
-      );
+      await interaction.editReply({
+        embeds: [
+          new EmbedBuilder()
+            .setTitle("Dica e Insigths da OBI")
+            .setDescription(
+              titleMarkdown + subjectMarkdown + linkMarkdown + apiResponse
+            )
+            .setColor(PRIMARY_COLOR)
+            .setFooter({ text: `Questão: ${question.title}` }),
+        ],
+      });
     } catch (e) {
-      await interaction.editReply(
-        "Ocorreu um erro ao tentar buscar processar o comando."
-      );
+      await interaction.editReply("Ocorreu um erro ao tentar buscar a questão");
     }
   },
 };
