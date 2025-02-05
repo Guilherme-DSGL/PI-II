@@ -44,25 +44,30 @@ class TopicoModel {
       try {
         const questions = [];
         let index = -1;
-        this.#csvService
-          .createReadStream()
+        let foundItems = 0;
+        const subjectLower = subject.toLowerCase().trim();
+        const stream = this.#csvService.createReadStream();
+
+        stream
           .on("data", (row) => {
-            if (
-              row.subject.toLowerCase().trim() === subject.toLowerCase().trim()
-            ) {
+            if (row.subject.toLowerCase().trim() === subjectLower) {
               index++;
-              if (
-                index >= currentIndex &&
-                index < currentIndex + itensPerPage
-              ) {
+              if (index >= currentIndex) {
                 questions.push(row);
+                foundItems++;
+              }
+              if (foundItems >= itensPerPage) {
+                resolve(questions);
+                stream.destroy();
               }
             }
           })
           .on("end", () => {
-            console.log(
-              `CSV file successfully processed. found ${questions.length} questions`
-            );
+            showMessage(questions.length);
+            resolve(questions);
+          })
+          .on("close", () => {
+            showMessage(questions.length);
             resolve(questions);
           })
           .on("error", (error) => {
@@ -74,5 +79,8 @@ class TopicoModel {
     });
   }
 }
+
+const showMessage = (count) =>
+  console.log(`CSV file successfully processed. Found ${count} questions`);
 
 module.exports = TopicoModel.getInstance(() => csvParserServiceInstance);
