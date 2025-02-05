@@ -125,13 +125,13 @@ GEMINI_API_KEY=  // KEY DO GEMINI // https://aistudio.google.com/app/apikey
    Utiliza o DISCORD_GUILD_ID para atualizar o bot em um servidor de testes
 
    ``` 
-      npm run deploy-guild
+   npm run deploy-guild
    ``` 
 
    ### Buildando os comandos global (em média 1h de tempo de propragação)
 
    ``` 
-      npm run deploy
+   npm run deploy
    ``` 
 
    ### Rodando o servidor
@@ -139,7 +139,7 @@ GEMINI_API_KEY=  // KEY DO GEMINI // https://aistudio.google.com/app/apikey
    ele gera o arquvio subject.js que é utiliziado para o autocomplete no comando /topico
 
    ``` 
-      npm run dev
+   npm run dev
    ``` 
 
       
