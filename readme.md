@@ -8,9 +8,13 @@ Desenvolver um bot para o Discord utilizando a biblioteca [discord.js](https://d
 
 ---
 
-## 🤖 Ícone do Bot
+## 🤖 OBI BOT
 
-<img src="./doc/botzin2.png" alt="Ícone do Bot" width="512" height="512">
+<img src="./doc/botzin2.png" alt="Ícone do Bot" width="256" height="256">
+
+
+https://github.com/user-attachments/assets/85ed4309-b185-4d82-9704-c4886d4629b6
+
 
 ---
 
