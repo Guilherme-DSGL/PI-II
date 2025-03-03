@@ -46,4 +46,5 @@ module.exports = {
   PRIVATE_SERVER_ID: process.env.DISCORD_GUILD_ID, //for tests in private discord
   GEMINI_API_KEY: process.env.GEMINI_API_KEY,
   TEMPLATE_QUESTION_PROMPT: TEMPLATE_QUESTION_PROMPT,
+  PRIMARY_COLOR: "#0099ff",
 };
