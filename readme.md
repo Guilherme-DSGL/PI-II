@@ -31,7 +31,7 @@ A aplicação seguirá o padrão **MVC** (Model-View-Controller) com o objetivo 
 - Implementada utilizando a biblioteca [discord.js](https://discord.js.org/), que fornece as ferramentas necessárias para criar e gerenciar as interações do usuário no Discord.
 
 ### **Camada de Controller:**
-- Contém a lógica de negócios para processar os comandos do usuário.
+- Contém a lógica para se comunicar com a camada de model.
 - Utiliza [discord.js](https://discord.js.org/) para integrar a interação do usuário com a lógica de execução do bot.
 
 ### **Camada de Model:**
