@@ -32,7 +32,7 @@ A aplicação seguirá o padrão **MVC** (Model-View-Controller) com o objetivo 
 
 ### **Camada de Controller:**
 - Contém a lógica para se comunicar com a camada de model.
-- Utiliza [discord.js](https://discord.js.org/) para integrar a interação do usuário com a lógica de execução do bot.
+- Separa a lógica da da interação do usuário com a lógica de execução do bot.
 
 ### **Camada de Model:**
 - Gerencia a lógica de dados e interage diretamente com a base de dados (neste caso, um arquivo CSV).
