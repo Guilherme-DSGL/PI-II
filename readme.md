@@ -98,14 +98,27 @@ A aplicação seguirá o padrão **MVC** (Model-View-Controller) com o objetivo 
 - **Banco de Dados:** Estrutura para armazenar informações das questões da OBI.
 
 ---
+## 🎨 Protótipo no Figma
 
-## 📋 Requisitos do Projeto
 
-1. **Comando para buscar insights de questões:**  
-   O bot precisa processar o link enviado pelo usuário, localizar a questão correspondente na base de dados e consultar a API Gemini para retornar as dicas.
 
-2. **Comando para buscar questões por tema:**  
-   O bot precisa permitir que o usuário envie um tema e, em seguida, consultar a base de dados para retornar questões relacionadas.
+Foi desenvolvido um protótipo do funcionamento das funcionalidades nas telas do discord:
+
+
+
+[🔗 Protótipo Bot no Figma](https://www.figma.com/design/QkJkW1DnlGrsD1ZQrcPVEt/Prot%C3%B3tipo-Bot)
+
+
+
+---
+
+
+
+## 🗄️ Diagrama de Classes 
+
+
+![Diagrama de Classes](./doc/DiagramaDeClasses.png)
+
 
 ## Rodando o projeto
    ### Configure o arquivo .env
