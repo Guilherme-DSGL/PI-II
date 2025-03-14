@@ -78,5 +78,4 @@ async function autoComplete(interaction) {
     console.error(error);
   }
 }
-
-client.login(env.token);
+client.login(env.TOKEN);
